@@ -1,0 +1,14 @@
+use_frameworks!
+
+platform :ios, '10.0'
+
+target 'KhaltiCheckout_Example' do
+  pod 'KhaltiCheckout', :path => '../'
+
+  target 'KhaltiCheckout_Tests' do
+    inherit! :search_paths
+
+    pod 'Quick', '~> 2.2.0'
+    pod 'Nimble', '~> 10.0.0'
+  end
+end
