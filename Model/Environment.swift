@@ -6,3 +6,6 @@
 //
 
 import Foundation
+enum class Environment {
+    PROD, TEST
+}
