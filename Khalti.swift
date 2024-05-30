@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+class Khalti{
+    private var config:KhaltiPayConfig
+    private onPaymentResult: ((PaymentResult,Khalti) -> () )
+    private
+}
