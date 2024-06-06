@@ -8,10 +8,6 @@
 import Foundation
 
 
-import Foundation
-
-
-
 @objc public class KhaltiPayConfig: NSObject {
     private var publicKey:String
     private var pIdx:String
@@ -30,8 +26,6 @@ import Foundation
         self.onPaymentResult = onPaymentResult
     }
     
-}
-
 
     @objc public func getPidx() -> String {
         return self.productId

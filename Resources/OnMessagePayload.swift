@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+class OnMessagePayload {
+    var event:OnMessageEvent
+    var message:String
+    var code:Int
+    var needsPaymentConfirmation:Bool = false
+}
