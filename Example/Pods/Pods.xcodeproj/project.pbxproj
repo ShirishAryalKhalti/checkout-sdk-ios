@@ -20,6 +20,12 @@
 		04DD78142C08A46900E0680F /* OnMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DD78132C08A46900E0680F /* OnMessage.swift */; };
 		04DD78162C08A52E00E0680F /* OnMessageEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DD78152C08A52E00E0680F /* OnMessageEvent.swift */; };
 		04E42DCC2C11804900A0106F /* OnMessagePayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E42DCB2C11804900A0106F /* OnMessagePayload.swift */; };
+		04E42DD42C11848E00A0106F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E42DD32C11848E00A0106F /* AppDelegate.swift */; };
+		04E42DD62C11848E00A0106F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E42DD52C11848E00A0106F /* SceneDelegate.swift */; };
+		04E42DD82C11848E00A0106F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E42DD72C11848E00A0106F /* ViewController.swift */; };
+		04E42DDB2C11848E00A0106F /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 04E42DDA2C11848E00A0106F /* Base */; };
+		04E42DDD2C11849000A0106F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04E42DDC2C11849000A0106F /* Assets.xcassets */; };
+		04E42DE02C11849000A0106F /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 04E42DDF2C11849000A0106F /* Base */; };
 		057C1964EBAFCBC649F8012723CDADF5 /* SatisfyAnyOf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B45B8866F896A1D4E16EA269D1491D9 /* SatisfyAnyOf.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		0650AF0DB8DE333CE5D99D704E29AC02 /* AllPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C812F0487069FBA5FF9D97D402282D5A /* AllPass.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		088A5A88342D60B6FCFAEADBF0749220 /* AdapterProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = C15D7AAAEEDCB1F4AD61CEE85297AE76 /* AdapterProtocols.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
@@ -185,6 +191,14 @@
 		04DD78132C08A46900E0680F /* OnMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnMessage.swift; sourceTree = "<group>"; };
 		04DD78152C08A52E00E0680F /* OnMessageEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnMessageEvent.swift; sourceTree = "<group>"; };
 		04E42DCB2C11804900A0106F /* OnMessagePayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnMessagePayload.swift; sourceTree = "<group>"; };
+		04E42DD12C11848E00A0106F /* KhaltiCheckoutExamples.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KhaltiCheckoutExamples.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		04E42DD32C11848E00A0106F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		04E42DD52C11848E00A0106F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		04E42DD72C11848E00A0106F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		04E42DDA2C11848E00A0106F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		04E42DDC2C11849000A0106F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		04E42DDF2C11849000A0106F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		04E42DE12C11849000A0106F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0533BA6060A6659B1A5405E417AD4BC1 /* QCKDSL.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QCKDSL.h; path = Sources/QuickObjectiveC/DSL/QCKDSL.h; sourceTree = "<group>"; };
 		08038AD837D92EC9FA5A729BA9AB09C4 /* QCKDSL.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = QCKDSL.m; path = Sources/QuickObjectiveC/DSL/QCKDSL.m; sourceTree = "<group>"; };
 		086CE156A93AC383A64943A13DAA1B42 /* ThrowAssertion.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThrowAssertion.swift; path = Sources/Nimble/Matchers/ThrowAssertion.swift; sourceTree = "<group>"; };
@@ -338,6 +352,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		04E42DCE2C11848E00A0106F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		142E6C8C1D643088F18528B713F30A01 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -424,6 +445,20 @@
 			children = (
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		04E42DD22C11848E00A0106F /* KhaltiCheckoutExamples */ = {
+			isa = PBXGroup;
+			children = (
+				04E42DD32C11848E00A0106F /* AppDelegate.swift */,
+				04E42DD52C11848E00A0106F /* SceneDelegate.swift */,
+				04E42DD72C11848E00A0106F /* ViewController.swift */,
+				04E42DD92C11848E00A0106F /* Main.storyboard */,
+				04E42DDC2C11849000A0106F /* Assets.xcassets */,
+				04E42DDE2C11849000A0106F /* LaunchScreen.storyboard */,
+				04E42DE12C11849000A0106F /* Info.plist */,
+			);
+			path = KhaltiCheckoutExamples;
 			sourceTree = "<group>";
 		};
 		1628BF05B4CAFDCC3549A101F5A10A17 /* Frameworks */ = {
@@ -515,6 +550,7 @@
 				57B9960F8EB7C3E7AC6A7185045B0F04 /* Pods-KhaltiCheckout_Example */,
 				20027FFEC1491EEEDFD1B7126024847A /* Pods-KhaltiCheckout_Tests */,
 				0D631E9908483F9525A6B3F36F16CC61 /* Quick */,
+				04E42DD12C11848E00A0106F /* KhaltiCheckoutExamples.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -597,6 +633,7 @@
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
 				4BB311F3A5479D1A93CBE0EAA3F489F4 /* Development Pods */,
+				04E42DD22C11848E00A0106F /* KhaltiCheckoutExamples */,
 				1628BF05B4CAFDCC3549A101F5A10A17 /* Frameworks */,
 				48E644B71AAE30F7A0800A3E597207D1 /* Pods */,
 				A9558E350F6DAD9BB4D47FB946E7DF09 /* Products */,
@@ -760,6 +797,23 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		04E42DD02C11848E00A0106F /* KhaltiCheckoutExamples */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04E42DE42C11849000A0106F /* Build configuration list for PBXNativeTarget "KhaltiCheckoutExamples" */;
+			buildPhases = (
+				04E42DCD2C11848E00A0106F /* Sources */,
+				04E42DCE2C11848E00A0106F /* Frameworks */,
+				04E42DCF2C11848E00A0106F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KhaltiCheckoutExamples;
+			productName = KhaltiCheckoutExamples;
+			productReference = 04E42DD12C11848E00A0106F /* KhaltiCheckoutExamples.app */;
+			productType = "com.apple.product-type.application";
+		};
 		6F13695E06195A78EA8A95F8C7ED0D2F /* Nimble */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84E3C08133057626870418A290649C7E /* Build configuration list for PBXNativeTarget "Nimble" */;
@@ -860,8 +914,15 @@
 		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1500;
+				LastSwiftUpdateCheck = 1540;
 				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					04E42DD02C11848E00A0106F = {
+						CreatedOnToolsVersion = 15.4;
+						DevelopmentTeam = HW5PK5B369;
+						ProvisioningStyle = Automatic;
+					};
+				};
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -881,11 +942,22 @@
 				8A7AEEB6D5B330D228773CE534C21503 /* Pods-KhaltiCheckout_Example */,
 				FA417562857B771BDF82374B1BE99282 /* Pods-KhaltiCheckout_Tests */,
 				C82891EAB7293DBEE916B21F57E8474D /* Quick */,
+				04E42DD02C11848E00A0106F /* KhaltiCheckoutExamples */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		04E42DCF2C11848E00A0106F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04E42DDD2C11849000A0106F /* Assets.xcassets in Resources */,
+				04E42DE02C11849000A0106F /* Base in Resources */,
+				04E42DDB2C11848E00A0106F /* Base in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5269B851F06D1EA47B8783F573EDBBEE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -925,6 +997,16 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		04E42DCD2C11848E00A0106F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04E42DD82C11848E00A0106F /* ViewController.swift in Sources */,
+				04E42DD42C11848E00A0106F /* AppDelegate.swift in Sources */,
+				04E42DD62C11848E00A0106F /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		78829FBB08106D26C6F05184CD383BD1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1095,7 +1177,96 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		04E42DD92C11848E00A0106F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				04E42DDA2C11848E00A0106F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		04E42DDE2C11849000A0106F /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				04E42DDF2C11849000A0106F /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		04E42DE22C11849000A0106F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HW5PK5B369;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = KhaltiCheckoutExamples/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.khalti.KhaltiCheckoutExamples;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		04E42DE32C11849000A0106F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HW5PK5B369;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = KhaltiCheckoutExamples/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.khalti.KhaltiCheckoutExamples;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		1461EC89B2951AB84B1770073902B41E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D3962A281D84725B4355F191EF327F80 /* Pods-KhaltiCheckout_Tests.debug.xcconfig */;
@@ -1541,6 +1712,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		04E42DE42C11849000A0106F /* Build configuration list for PBXNativeTarget "KhaltiCheckoutExamples" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04E42DE22C11849000A0106F /* Debug */,
+				04E42DE32C11849000A0106F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		372A8D0F2DE479AFC1CF04411C2779AA /* Build configuration list for PBXNativeTarget "Pods-KhaltiCheckout_Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
