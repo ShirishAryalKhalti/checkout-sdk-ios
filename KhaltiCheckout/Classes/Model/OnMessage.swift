@@ -7,6 +7,9 @@
 
 import Foundation
 
-class OnMessage {
+public class OnMessage {
     private var onMesagePayload:((OnMessagePayload,Khalti) -> ())
+    init(onMesagePayload: @escaping (OnMessagePayload, Khalti) -> Void) {
+        self.onMesagePayload = onMesagePayload
+    }
 }

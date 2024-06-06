@@ -8,5 +8,5 @@
 import Foundation
 
 enum ErrorType {
-    generic,error
+    case generic,error
 }

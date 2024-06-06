@@ -8,5 +8,5 @@
 import Foundation
 
 enum OnMessageEvent {
-    KPGDisposed, ReturnUrlLoadFailure, NetworkFailure, PaymentLookUpFailure, Unknown, TransactionDetailLookUpFailure,
+    case KPGDisposed, ReturnUrlLoadFailure, NetworkFailure, PaymentLookUpFailure, Unknown, TransactionDetailLookUpFailure
 }

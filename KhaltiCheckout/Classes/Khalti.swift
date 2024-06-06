@@ -6,22 +6,22 @@
 //
 
 import Foundation
-typealias OnPaymentResult = ((PaymentResult,Khalti) -> () )
-typealias OnMessage = ((OnMessage,Khalti) -> () )
-typealias OnReturn = (Khalti) -> () )
+public typealias OnPaymentResult = (PaymentResult,Khalti) -> ()
+public typealias OnMessageResult = (OnMessage,Khalti) -> ()
+public typealias OnReturn = (Khalti) -> ()
 
 
-class Khalti{
+public class Khalti{
     private var config:KhaltiPayConfig
-    private onPaymentResult: OnPaymentResult
-    private onMessage: OnMessage
-    private onReturn:OnReturn
+    private var onPaymentResult: OnPaymentResult
+    private var onMessage: OnMessageResult
+    private var onReturn:OnReturn
     
-    init(config: KhaltiPayConfig,onPaymentResult:OnPaymentResult,onMessage:OnMessage,onReturn:OnReturn) {
+     public init(config: KhaltiPayConfig,onPaymentResult: @escaping OnPaymentResult,onMessage:@escaping OnMessageResult,onReturn:@escaping OnReturn) {
         self.config = config
-        self.onPaymentResult=OnPaymentResult
-        self.onMessage = OnMessage
-        self.onReturn = OnReturn
+        self.onPaymentResult = onPaymentResult
+        self.onMessage = onMessage
+        self.onReturn = onReturn
     }
     
     

@@ -6,6 +6,6 @@
 //
 
 import Foundation
-enum class Environment {
-    PROD, TEST
+public enum  Environment {
+    case PROD, TEST
 }

@@ -8,17 +8,47 @@
 
 import UIKit
 import KhaltiCheckout
-class ViewController: UIViewController {
 
+class ViewController: UIViewController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        // Create the button
+        let button = UIButton(type: .system)
+        button.setTitle("Click Me", for: .normal)
+        button.backgroundColor = .systemBlue
+        button.setTitleColor(.brown, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false // Enable Auto Layout
+        
+        // Add the button to the view
+        view.addSubview(button)
+        
+        // Set up Auto Layout constraints
+        NSLayoutConstraint.activate([
+            button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            button.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            button.widthAnchor.constraint(equalToConstant: 200),
+            button.heightAnchor.constraint(equalToConstant: 50)
+        ])
+        
+        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    
+    @objc func buttonTapped() {
+        
+        Khalti(config: KhaltiPayConfig(publicKey:"live_public_key_979320ffda734d8e9f7758ac39ec775f", pIdx:"EKatER7gGM4ayxk3U2ijmK",environment:Environment.TEST), onPaymentResult: {(paymentResult,khalti) in
+            
+        }, onMessage: {(onMessage,khalti) in
+            
+        }, onReturn: {(khalti) in
+            
+        })
+        
     }
-
+    
 }
+
+
 

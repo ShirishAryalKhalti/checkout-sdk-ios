@@ -8,30 +8,30 @@
 import Foundation
 
 
-@objc public class KhaltiPayConfig: NSObject {
+public class KhaltiPayConfig: NSObject {
     private var publicKey:String
     private var pIdx:String
-    private var openInKhalti:Bool = false
-    private var environment:Environment?
+    private var openInKhalti:Bool? = false
+    private var environment:Environment = Environment.TEST
     
-    @objc public init(publicKey:String,pIdx:String,openInKhalti:bool? = false,environment:Environment) {
+      public init(publicKey:String,pIdx:String,openInKhalti:Bool? = false,environment:Environment) {
         self.publicKey = publicKey
-        self.pIdx = productId
-        self.openInKhalti= openInKhalti
+        self.pIdx = pIdx
+        self.openInKhalti = openInKhalti
         self.environment = environment
     }
     
 
-    @objc public func getPidx() -> String {
-        return self.productId
+      func getPidx() -> String {
+        return self.pIdx
     }
-    @objc public func getPublicKey() -> String {
+      func getPublicKey() -> String {
         return self.publicKey
     }
-    @objc public func getOpenInKhalti() -> Bool{
-        return self.openInKhalti
+    func getOpenInKhalti() -> Bool{
+        return self.openInKhalti!
     }
-    @objc public func getEnvironment() -> Environment{
+      func getEnvironment() -> Environment{
         return self.environment
     }
 
