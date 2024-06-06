@@ -27,10 +27,7 @@ class KhaltiCheckOutWebViewController: UIViewController,WKNavigationDelegate, WK
           wkWebView.backgroundColor = UIColor.lightGray
           wkWebView.translatesAutoresizingMaskIntoConstraints = false
           view.addSubview(wkWebView)
-          
-          // Adding observers (uncomment if needed)
-          // wkWebView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
-          // wkWebView.addObserver(self, forKeyPath: "title", options: .new, context: nil)
+        
           
           NSLayoutConstraint.activate([
               wkWebView.topAnchor.constraint(equalTo: view.topAnchor),

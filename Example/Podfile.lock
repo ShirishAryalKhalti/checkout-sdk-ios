@@ -5,8 +5,8 @@ PODS:
 
 DEPENDENCIES:
   - KhaltiCheckout (from `../`)
-  - Nimble (~> 10.0.0)
-  - Quick (~> 2.2.0)
+  - Nimble
+  - Quick
 
 SPEC REPOS:
   trunk:
@@ -22,6 +22,6 @@ SPEC CHECKSUMS:
   Nimble: 5316ef81a170ce87baf72dd961f22f89a602ff84
   Quick: f5754d69b7013f5864c29aab9ae6f0c79c5bc200
 
-PODFILE CHECKSUM: f7ee2bc6ef9eba78487b34818b7d8cf6e97e22a6
+PODFILE CHECKSUM: 0a3103fb20c139b45c69998760d221b2ee03adee
 
 COCOAPODS: 1.15.2
