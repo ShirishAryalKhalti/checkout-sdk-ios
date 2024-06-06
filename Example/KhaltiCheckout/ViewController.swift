@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import KhaltiCheckout
 class ViewController: UIViewController {
 
     override func viewDidLoad() {

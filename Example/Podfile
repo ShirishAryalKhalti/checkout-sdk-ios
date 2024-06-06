@@ -1,6 +1,6 @@
 use_frameworks!
 
-platform :ios, '10.0'
+platform :ios, '2.0'
 
 target 'KhaltiCheckout_Example' do
   pod 'KhaltiCheckout', :path => '../'
