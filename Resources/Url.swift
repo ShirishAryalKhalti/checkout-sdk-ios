@@ -6,7 +6,7 @@
 //
 
 import Foundation
-enum class Url(val value: String) {
+enum Url(val value: String) {
     BASE_KHALTI_URL_PROD("https://khalti.com/api/v2/"),
     BASE_KHALTI_URL_STAGING("https://dev.khalti.com/api/v2/"),
     BASE_PAYMENT_URL_PROD("https://pay.khalti.com/"),
