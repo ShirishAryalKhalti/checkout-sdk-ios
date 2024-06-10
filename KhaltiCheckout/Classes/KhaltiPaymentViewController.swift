@@ -12,10 +12,11 @@ import WebKit
 class KhaltiPaymentViewController: UIViewController,WKNavigationDelegate, WKUIDelegate {
     var wkWebView: WKWebView = WKWebView()
     var request:URLRequest?
+    var config:KhaltiPayConfig?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        createPaymentWebView()
+//        createPaymentWebView()
         wkWebView.backgroundColor = UIColor.lightGray
         wkWebView.frame = view.bounds
         wkWebView.center = view.center
@@ -41,11 +42,19 @@ class KhaltiPaymentViewController: UIViewController,WKNavigationDelegate, WKUIDe
           ])
         
         if let url = getPaymentUrl(){
-            request = URLRequest(url: url!)
+            request = URLRequest(url: url)
             loadRequest()
 
         }
                 // Do any additional setup after loading the view.
+    }
+    
+    func getPaymentUrl() -> URL?{
+        let urlEnv = (config?.isProd() ?? false) ?  Url.BASE_PAYMENT_URL_PROD : Url.BASE_PAYMENT_URL_STAGING
+        
+        let url = URL(string:urlEnv.rawValue)?.appendQueryParams([URLQueryItem(name: "pIdx", value: config?.pIdx ?? "")])
+        print(url)
+        return url
     }
     
     func loadRequest() {
@@ -112,13 +121,7 @@ class KhaltiPaymentViewController: UIViewController,WKNavigationDelegate, WKUIDe
 
 
 
-func getPaymentUrl() -> Url?{
-    let urlEnv = (config?.isProd() ?? false) ?  Url.BASE_PAYMENT_URL_PROD : Url.BASE_PAYMENT_URL_STAGING
-    
-    let url = URL(string:urlEnv.rawValue)?.appendQueryParams([URLQueryItem(name: "pIdx", value: config?.pIdx ?? "")])
-    print(url)
-    return url
-}
+
 
 extension URL {
     /// Returns a new URL by adding the query items, or nil if the URL doesn't support it.
