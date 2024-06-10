@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		01236C984BBB2918575C35713E2E08B4 /* BeLessThanOrEqual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5B911FA2A290D558ABF9998CFD82FD /* BeLessThanOrEqual.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		0258519887C7677C735B67B057DC4363 /* XCTestSuite+QuickTestSuiteBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = DA27CE34ECE6DD0D5620D5B5C7B36FE4 /* XCTestSuite+QuickTestSuiteBuilder.m */; };
+		0490AD602C17298A006F7ADA /* KhaltiCheckoutExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0490AD5F2C17298A006F7ADA /* KhaltiCheckoutExtensions.swift */; };
 		0495F8772C16EE34003A389B /* KhaltiGlobal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0495F8762C16EE34003A389B /* KhaltiGlobal.swift */; };
 		04CD9A072C11E1B7009A42F3 /* KhaltiApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CD9A062C11E1B7009A42F3 /* KhaltiApi.swift */; };
 		057C1964EBAFCBC649F8012723CDADF5 /* SatisfyAnyOf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B45B8866F896A1D4E16EA269D1491D9 /* SatisfyAnyOf.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
@@ -175,6 +176,7 @@
 		028C5C9AAB00433CC4E9D23B59FAB93C /* Quick.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Quick.modulemap; sourceTree = "<group>"; };
 		0296E59B7B6E6BCACF8BD4A2884556B0 /* Pods-KhaltiCheckout_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-KhaltiCheckout_Example-frameworks.sh"; sourceTree = "<group>"; };
 		034AA505530AA0C05F28C0BDE110FB8D /* Pods-KhaltiCheckout_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-KhaltiCheckout_Tests.modulemap"; sourceTree = "<group>"; };
+		0490AD5F2C17298A006F7ADA /* KhaltiCheckoutExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KhaltiCheckoutExtensions.swift; sourceTree = "<group>"; };
 		0495F8762C16EE34003A389B /* KhaltiGlobal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KhaltiGlobal.swift; sourceTree = "<group>"; };
 		04CD9A062C11E1B7009A42F3 /* KhaltiApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KhaltiApi.swift; sourceTree = "<group>"; };
 		0533BA6060A6659B1A5405E417AD4BC1 /* QCKDSL.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QCKDSL.h; path = Sources/QuickObjectiveC/DSL/QCKDSL.h; sourceTree = "<group>"; };
@@ -456,6 +458,7 @@
 				CF6B4DD0A5A552F20722D241A5AB8D59 /* OnMessagePayload.swift */,
 				D614F67364F5437B4AF6F06E87EF870D /* Url.swift */,
 				0495F8762C16EE34003A389B /* KhaltiGlobal.swift */,
+				0490AD5F2C17298A006F7ADA /* KhaltiCheckoutExtensions.swift */,
 			);
 			name = Resources;
 			path = KhaltiCheckout/Classes/Resources;
@@ -935,6 +938,7 @@
 			files = (
 				734B55CF5807A112344C12D22B0C6009 /* Environment.swift in Sources */,
 				F30042F4BD809304BA4F1F629712B7FD /* ErrorType.swift in Sources */,
+				0490AD602C17298A006F7ADA /* KhaltiCheckoutExtensions.swift in Sources */,
 				D6401831C6DCCA0EAEC3CFCD7946FAE7 /* Khalti.swift in Sources */,
 				0495F8772C16EE34003A389B /* KhaltiGlobal.swift in Sources */,
 				C8A37A1A8C9DCEC4F8BFB2225C9FD1AE /* KhaltiCheckout-dummy.m in Sources */,
