@@ -6,3 +6,19 @@
 //
 
 import Foundation
+
+class KhaltiGlobal {
+    
+    static var shared = KhaltiGlobal()
+    static var khaltiConfig:KhaltiPayConfig?
+    
+    static func setKhaltiPayconfig(config:KhaltiPayConfig){
+        self.khaltiConfig = config
+    }
+    
+    static func getKhaltiPayconfig() -> KhaltiPayConfig?
+    {
+        return self.khaltiConfig;
+    }
+    
+}
