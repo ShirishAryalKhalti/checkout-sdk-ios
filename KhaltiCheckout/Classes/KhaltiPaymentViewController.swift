@@ -9,10 +9,11 @@
 import UIKit
 import WebKit
 
-class KhaltiPaymentViewController: UIViewController,WKNavigationDelegate, WKUIDelegate {
+class KhaltiPaymentViewController: UIViewController {
     var wkWebView: WKWebView = WKWebView()
     var request:URLRequest?
     var config:KhaltiPayConfig?
+    var onReceived: ((String) -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +31,7 @@ class KhaltiPaymentViewController: UIViewController,WKNavigationDelegate, WKUIDe
           wkWebView.translatesAutoresizingMaskIntoConstraints = false
           view.addSubview(wkWebView)
         wkWebView.navigationDelegate = self
-        let config = KhaltiGlobal.getKhaltiPayconfig()
+        config = KhaltiGlobal.getKhaltiPayconfig()
 
 
           
@@ -52,7 +53,7 @@ class KhaltiPaymentViewController: UIViewController,WKNavigationDelegate, WKUIDe
     func getPaymentUrl() -> URL?{
         let urlEnv = (config?.isProd() ?? false) ?  Url.BASE_PAYMENT_URL_PROD : Url.BASE_PAYMENT_URL_STAGING
         
-        let url = URL(string:urlEnv.rawValue)?.appendQueryParams([URLQueryItem(name: "pIdx", value: config?.pIdx ?? "")])
+        let url = URL(string:urlEnv.rawValue)?.appendQueryParams([URLQueryItem(name: "pidx", value: config?.pIdx ?? "")])
         print(url)
         return url
     }
@@ -71,8 +72,15 @@ class KhaltiPaymentViewController: UIViewController,WKNavigationDelegate, WKUIDe
         }
     }
     
+  
+}
+
+// MARK: - WebView Delegates function
+
+extension KhaltiPaymentViewController :WKNavigationDelegate, WKUIDelegate{
     func webView(_ webView: WKWebView, didReceive response: URLResponse, for navigation: WKNavigation!) {
         print("1")
+        
         if let httpResponse = response as? HTTPURLResponse {
             print(httpResponse)
             if httpResponse.statusCode == 200 {
@@ -85,7 +93,7 @@ class KhaltiPaymentViewController: UIViewController,WKNavigationDelegate, WKUIDe
         }
     }
     
-
+    
     
     func webView(_ webView: WKWebView,didFinish navigation: WKNavigation!) {
         print("3")
@@ -118,7 +126,6 @@ class KhaltiPaymentViewController: UIViewController,WKNavigationDelegate, WKUIDe
         }
     }
 }
-
 
 
 
