@@ -15,28 +15,34 @@ class KhaltiPaymentViewController: UIViewController {
     var config:KhaltiPayConfig?
     var onReceived: ((String) -> Void)?
     let loadingView = CustomLoadingView()
-
+    let viewModel = KhaltiPaymentControllerViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupLoadingView()
-        showCustomDialog()
+//        showCustomDialog()
         loadingView.startLoading()
-//        // Set up the toolbar
-//        let toolbar = UIToolbar(frame: CGRect(x: 0, y: view.frame.size.height - 44, width: view.frame.size.width, height: 44))
-//        toolbar.barStyle = .default
-//        view.addSubview(toolbar)
-//        
-//        // Add flexible space to push button to the right
-//        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-//        
-//        // Add back button
-//        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backButtonTapped))
-//        
-//        toolbar.items = [flexibleSpace, backButton]
+        viewModel.getPaymentDetail(onCompletion: { [weak self ] response in
+            self?.loadingView.stopLoading()
+        }, onError: {[weak self] msg in
+            self?.loadingView.stopLoading()
+        })        //        // Set up the toolbar
+        //        let toolbar = UIToolbar(frame: CGRect(x: 0, y: view.frame.size.height - 44, width: view.frame.size.width, height: 44))
+        //        toolbar.barStyle = .default
+        //        view.addSubview(toolbar)
+        //
+        //        // Add flexible space to push button to the right
+        //        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        //
+        //        // Add back button
+        //        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backButtonTapped))
+        //
+        //        toolbar.items = [flexibleSpace, backButton]
         
-//        createPaymentWebView()
+        //        createPaymentWebView()
         
-                // Do any additional setup after loading the view.
+        // Do any additional setup after loading the view.
     }
     
     private func setupLoadingView() {
@@ -52,22 +58,22 @@ class KhaltiPaymentViewController: UIViewController {
     }
     
     private func showCustomDialog(){
-            let dialogView = CustomDialogView()
-            dialogView.translatesAutoresizingMaskIntoConstraints = false
-            view.addSubview(dialogView)
-            
-            NSLayoutConstraint.activate([
-                dialogView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                dialogView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-                dialogView.widthAnchor.constraint(equalToConstant: 300),
-                dialogView.heightAnchor.constraint(equalToConstant: 200)
-            ])
-            
-            dialogView.configure(message: "Are you sure you want to continue?", buttonTitle: "OK") {
-                print("Button tapped")
-                // Dismiss the dialog
-                dialogView.removeFromSuperview()
-            }
+        let dialogView = CustomDialogView()
+        dialogView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(dialogView)
+        
+        NSLayoutConstraint.activate([
+            dialogView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            dialogView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            dialogView.widthAnchor.constraint(equalToConstant: 300),
+            dialogView.heightAnchor.constraint(equalToConstant: 200)
+        ])
+        
+        dialogView.configure(message: "Are you sure you want to continue?", buttonTitle: "OK") {
+            print("Button tapped")
+            // Dismiss the dialog
+            dialogView.removeFromSuperview()
+        }
         
     }
     
@@ -102,7 +108,7 @@ class KhaltiPaymentViewController: UIViewController {
     }
     
     
-   
+    
     func createPaymentWebView(){
         wkWebView.backgroundColor = UIColor.lightGray
         wkWebView.frame = view.bounds
