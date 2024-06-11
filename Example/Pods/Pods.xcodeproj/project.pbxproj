@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		01236C984BBB2918575C35713E2E08B4 /* BeLessThanOrEqual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5B911FA2A290D558ABF9998CFD82FD /* BeLessThanOrEqual.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		0258519887C7677C735B67B057DC4363 /* XCTestSuite+QuickTestSuiteBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = DA27CE34ECE6DD0D5620D5B5C7B36FE4 /* XCTestSuite+QuickTestSuiteBuilder.m */; };
+		040412752C183D5500273C6C /* CustomLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040412742C183D5500273C6C /* CustomLoadingView.swift */; };
+		046283F02C1858DE00645F9B /* CustomDialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046283EF2C1858DE00645F9B /* CustomDialogView.swift */; };
 		0490AD602C17298A006F7ADA /* KhaltiCheckoutExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0490AD5F2C17298A006F7ADA /* KhaltiCheckoutExtensions.swift */; };
 		0495F8772C16EE34003A389B /* KhaltiGlobal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0495F8762C16EE34003A389B /* KhaltiGlobal.swift */; };
 		04CD9A072C11E1B7009A42F3 /* KhaltiApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CD9A062C11E1B7009A42F3 /* KhaltiApi.swift */; };
@@ -176,6 +178,8 @@
 		028C5C9AAB00433CC4E9D23B59FAB93C /* Quick.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Quick.modulemap; sourceTree = "<group>"; };
 		0296E59B7B6E6BCACF8BD4A2884556B0 /* Pods-KhaltiCheckout_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-KhaltiCheckout_Example-frameworks.sh"; sourceTree = "<group>"; };
 		034AA505530AA0C05F28C0BDE110FB8D /* Pods-KhaltiCheckout_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-KhaltiCheckout_Tests.modulemap"; sourceTree = "<group>"; };
+		040412742C183D5500273C6C /* CustomLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLoadingView.swift; sourceTree = "<group>"; };
+		046283EF2C1858DE00645F9B /* CustomDialogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDialogView.swift; sourceTree = "<group>"; };
 		0490AD5F2C17298A006F7ADA /* KhaltiCheckoutExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KhaltiCheckoutExtensions.swift; sourceTree = "<group>"; };
 		0495F8762C16EE34003A389B /* KhaltiGlobal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KhaltiGlobal.swift; sourceTree = "<group>"; };
 		04CD9A062C11E1B7009A42F3 /* KhaltiApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KhaltiApi.swift; sourceTree = "<group>"; };
@@ -409,6 +413,15 @@
 			path = "../Target Support Files/Quick";
 			sourceTree = "<group>";
 		};
+		040412732C183D3B00273C6C /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				040412742C183D5500273C6C /* CustomLoadingView.swift */,
+				046283EF2C1858DE00645F9B /* CustomDialogView.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
 		04CD9A052C11E19E009A42F3 /* Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -491,6 +504,7 @@
 		8905A587D9294289210C45B673780ED9 /* KhaltiCheckout */ = {
 			isa = PBXGroup;
 			children = (
+				040412732C183D3B00273C6C /* Component */,
 				04CD9A052C11E19E009A42F3 /* Service */,
 				FF7D9CF08BD073ABAC440DA16402A7AF /* Khalti.swift */,
 				EF6C76C7D2E840DA9B13E3E5518CC763 /* KhaltiPaymentViewController.swift */,
@@ -943,12 +957,14 @@
 				0495F8772C16EE34003A389B /* KhaltiGlobal.swift in Sources */,
 				C8A37A1A8C9DCEC4F8BFB2225C9FD1AE /* KhaltiCheckout-dummy.m in Sources */,
 				E0E58D5E4E8E7C32240921EC49E586D3 /* KhaltiPaymentViewController.swift in Sources */,
+				046283F02C1858DE00645F9B /* CustomDialogView.swift in Sources */,
 				7DB02D62C895C12871F5DA4CA3B80E51 /* KhaltiPayConfig.swift in Sources */,
 				94D1B011E5248AA8FF5A99227DF3B7C4 /* OnMessage.swift in Sources */,
 				FFAAF7D3F4A0C46DF6AB9ACC16A6A2FB /* OnMessageEvent.swift in Sources */,
 				2A384C820A2875EECBAF1FA9B041B391 /* OnMessagePayload.swift in Sources */,
 				04CD9A072C11E1B7009A42F3 /* KhaltiApi.swift in Sources */,
 				4F3B1E99EFBCBF8EAAD6E3DF04C6B879 /* PaymentResult.swift in Sources */,
+				040412752C183D5500273C6C /* CustomLoadingView.swift in Sources */,
 				36F88F642F9F740A836F960ABAF5713B /* Url.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
