@@ -14,40 +14,48 @@ class KhaltiPaymentViewController: UIViewController {
     var request:URLRequest?
     var config:KhaltiPayConfig?
     var onReceived: ((String) -> Void)?
+    let loadingView = CustomLoadingView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupLoadingView()
+        loadingView.startLoading()
+//        // Set up the toolbar
+//        let toolbar = UIToolbar(frame: CGRect(x: 0, y: view.frame.size.height - 44, width: view.frame.size.width, height: 44))
+//        toolbar.barStyle = .default
+//        view.addSubview(toolbar)
+//        
+//        // Add flexible space to push button to the right
+//        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+//        
+//        // Add back button
+//        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backButtonTapped))
+//        
+//        toolbar.items = [flexibleSpace, backButton]
+        
 //        createPaymentWebView()
-        wkWebView.backgroundColor = UIColor.lightGray
-        wkWebView.frame = view.bounds
-        wkWebView.center = view.center
-        wkWebView.isOpaque = false
         
-        // Initialize WKWebView with a configuration
-          let configuration = WKWebViewConfiguration()
-          wkWebView = WKWebView(frame: .zero, configuration: configuration)
-          
-          
-          wkWebView.translatesAutoresizingMaskIntoConstraints = false
-          view.addSubview(wkWebView)
-        wkWebView.navigationDelegate = self
-        config = KhaltiGlobal.getKhaltiPayconfig()
-
-
-          
-          NSLayoutConstraint.activate([
-              wkWebView.topAnchor.constraint(equalTo: view.topAnchor),
-              wkWebView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-              wkWebView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-              wkWebView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-          ])
-        
-        if let url = getPaymentUrl(){
-            request = URLRequest(url: url)
-            loadRequest()
-
-        }
                 // Do any additional setup after loading the view.
+    }
+    
+    private func setupLoadingView() {
+        view.addSubview(loadingView)
+        loadingView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            loadingView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loadingView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            loadingView.widthAnchor.constraint(equalToConstant: 150),
+            loadingView.heightAnchor.constraint(equalToConstant: 100)
+        ])
+        loadingView.isHidden = true
+    }
+    
+    @objc func backButtonTapped() {
+        // Handle back button tap here
+        // For example, present another view controller or perform any action
+        let alertController = UIAlertController(title: "Back Button Tapped", message: "You tapped the back button.", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alertController, animated: true, completion: nil)
     }
     
     func getPaymentUrl() -> URL?{
@@ -72,7 +80,39 @@ class KhaltiPaymentViewController: UIViewController {
         }
     }
     
-  
+    
+   
+    func createPaymentWebView(){
+        wkWebView.backgroundColor = UIColor.lightGray
+        wkWebView.frame = view.bounds
+        wkWebView.center = view.center
+        wkWebView.isOpaque = false
+        
+        // Initialize WKWebView with a configuration
+        let configuration = WKWebViewConfiguration()
+        wkWebView = WKWebView(frame: .zero, configuration: configuration)
+        
+        
+        wkWebView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(wkWebView)
+        wkWebView.navigationDelegate = self
+        config = KhaltiGlobal.getKhaltiPayconfig()
+        
+        
+        
+        NSLayoutConstraint.activate([
+            wkWebView.topAnchor.constraint(equalTo: view.topAnchor),
+            wkWebView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            wkWebView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            wkWebView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+        
+        if let url = getPaymentUrl(){
+            request = URLRequest(url: url)
+            loadRequest()
+            
+        }
+    }
 }
 
 // MARK: - WebView Delegates function
@@ -129,19 +169,3 @@ extension KhaltiPaymentViewController :WKNavigationDelegate, WKUIDelegate{
 
 
 
-
-extension URL {
-    /// Returns a new URL by adding the query items, or nil if the URL doesn't support it.
-    /// URL must conform to RFC 3986.
-    func appendQueryParams(_ queryItems: [URLQueryItem]) -> URL? {
-        guard var urlComponents = URLComponents(url: self, resolvingAgainstBaseURL: true) else {
-            // URL is not conforming to RFC 3986 (maybe it is only conforming to RFC 1808, RFC 1738, and RFC 2732)
-            return nil
-        }
-        // append the query items to the existing ones
-        urlComponents.queryItems = (urlComponents.queryItems ?? []) + queryItems
-        
-        // return the url from new url components
-        return urlComponents.url
-    }
-}
