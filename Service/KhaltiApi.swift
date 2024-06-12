@@ -7,23 +7,16 @@
 
 import Foundation
 
+protocol KhaltiApiServiceProtocol {
+    func handleRequest<T: Codable>(request: URLRequest, onSuccess: @escaping (T) -> (), onError: @escaping (String) -> ())
+}
+
 class KhaltiAPI {
     
     //    static let shared = KhaltiAPI()
     //    static let logMessage:Bool = Khalti.shared.debugLog
-    
-    private func createGetRequest(for url:URL,body:[String:String]) -> URLRequest {
-        
-        var request = URLRequest(url: url)
-        request.httpBody = createHttpBody(body: body)
-        
-        request.setValue(Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String, forHTTPHeaderField: "checkout-version")
-        request.setValue("iOS", forHTTPHeaderField: "checkout-source")
-        request.setValue(UIDevice.current.model, forHTTPHeaderField: "checkout-device-model")
-        request.setValue(UIDevice.current.identifierForVendor?.uuidString ?? "", forHTTPHeaderField: "checkout-device-id")
-        request.setValue(UIDevice.current.systemVersion, forHTTPHeaderField: "checkout-ios-version")
-        return request
-    }
+    let config = KhaltiGlobal.khaltiConfig
+
     private func createHttpBody(body:[String:String]) ->Data?{
         guard let jsonData = try? JSONSerialization.data(withJSONObject: body, options: []) else {
             print("Error converting parameters to JSON")
@@ -48,11 +41,30 @@ class KhaltiAPI {
         return request
     }
     
-    func fetchDetail(params:[String:String],onCompletion: @escaping ((PaymentDetailModel)->()), onError: @escaping ((String)->())) {
-        let config = KhaltiGlobal.khaltiConfig
-        let urlEnv = (config?.isProd() ?? false) ? Url.BASE_KHALTI_URL_PROD: Url.BASE_KHALTI_URL_STAGING
-        let url = urlEnv.appendBaseUrl(url:Url.PAYMENT_DETAIL.rawValue)
+    func fetchDetail(url:String,params:[String:String],onCompletion: @escaping ((PaymentDetailModel)->()), onError: @escaping ((String)->())) {
         
+     
+        
+        
+        guard let url = URL(string:url) else {
+            onError("Error on parsing Url")
+            return
+        }
+        
+        let configuration = URLSessionConfiguration.ephemeral
+        let session = URLSession(configuration: configuration, delegate: nil, delegateQueue: OperationQueue.main)
+        let request = self.createRequest(for: url,body: params)
+        
+        self.handleRequest(request: request, onSuccess: {(model)in
+            onCompletion(model)
+        }, onError: {(error) in
+            onError(error)
+        })
+        
+    }
+    
+    
+    func fetchPaymentStatus(url:String,params:[String:String],onCompletion: @escaping ((PaymentDetailModel)->()), onError: @escaping ((String)->())) {
         
         guard let url = URL(string: url) else {
             onError("Error on parsing Url")
@@ -63,47 +75,12 @@ class KhaltiAPI {
         let session = URLSession(configuration: configuration, delegate: nil, delegateQueue: OperationQueue.main)
         let request = self.createRequest(for: url,body: params)
         
-        let task = session.dataTask(with: request) { data, response, error in
-            if let error = error {
-                onError(error.localizedDescription)
-                return
-            }
-            
-            print("===========================================================")
-            print("Status: \(request), Response for: \(url)")
-            print("===========================================================")
-            
-            
-            
-            guard let data = data else {
-                //                onError(NetworkError.noData.rawValue)
-                return
-            }
-            
-            print(response)
-            guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
-                //                onError(NetworkError.noResponse.rawValue)
-                
-                return
-            }
-            
-            print("Status: \(response.statusCode), Response for: \(url)")
-            print("===========================================================")
-            print("\(response)")
-            print("===========================================================")
-            
-            
-            do {
-                let user = try JSONDecoder().decode(PaymentDetailModel.self, from: data)
-                print(user)
-                onCompletion(user)
-            } catch {
-                onError(error.localizedDescription)
-                //                onError(NetworkError.parseError.rawValue)
-            }
-        }
+        self.handleRequest(request: request, onSuccess: {(model)in
+            onCompletion(model)
+        }, onError: {(error) in
+            onError(error)
+        })
         
-        task.resume()
     }
     
     //    func epaymentLookUp(onCompletion: @escaping (([String:Any])->()), onError: @escaping ((String)->())) {
@@ -148,5 +125,32 @@ class KhaltiAPI {
     //        }
     //        task.resume()
     //    }
+    
+}
+
+extension KhaltiAPI:KhaltiApiServiceProtocol{
+    func handleRequest<T>(request: URLRequest, onSuccess: @escaping (T) -> (), onError: @escaping (String) -> ()) where T : Decodable, T : Encodable {
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                onError("Request failed with error: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let data = data else {
+                onError("No data received")
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                let decodedObject = try decoder.decode(T.self, from: data)
+                onSuccess(decodedObject)
+            } catch let decodingError {
+                onError("Failed to decode response: \(decodingError.localizedDescription)")
+            }
+        }
+        task.resume()
+    }
+    
     
 }
