@@ -11,10 +11,22 @@ class KhaltiGlobal {
     
     static var shared = KhaltiGlobal()
     static var khaltiConfig:KhaltiPayConfig?
+    static var khalti:Khalti?
     
     static func setKhaltiPayconfig(config:KhaltiPayConfig){
         self.khaltiConfig = config
     }
+    
+    static func setKhalti(khalti:Khalti){
+        self.khalti = khalti
+    }
+    
+    static func getKhalti(khalti:Khalti) -> Khalti?{
+        return self.khalti
+        
+    }
+    
+    
     
     static func getKhaltiPayconfig() -> KhaltiPayConfig?
     {
