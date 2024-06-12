@@ -16,16 +16,20 @@ class KhaltiPaymentViewController: UIViewController {
     var onReceived: ((String) -> Void)?
     let loadingView = CustomLoadingView()
     let viewModel = KhaltiPaymentControllerViewModel()
+    let dialogView = CustomDialogView()
+    
+    // callbacks
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupLoadingView()
         
-//        showCustomDialog()
+        //        showCustomDialog()
         loadingView.startLoading()
         fetchPaymentDetail()
-            //        // Set up the toolbar
+        //        // Set up the toolbar
         //        let toolbar = UIToolbar(frame: CGRect(x: 0, y: view.frame.size.height - 44, width: view.frame.size.width, height: 44))
         //        toolbar.barStyle = .default
         //        view.addSubview(toolbar)
@@ -56,8 +60,7 @@ class KhaltiPaymentViewController: UIViewController {
         loadingView.isHidden = true
     }
     
-    private func showCustomDialog(message:String){
-        let dialogView = CustomDialogView()
+    private func showCustomDialog(message:String,onTapped:@escaping () -> Void){
         dialogView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(dialogView)
         
@@ -70,8 +73,9 @@ class KhaltiPaymentViewController: UIViewController {
         
         dialogView.configure(message: message, buttonTitle: "OK") {
             print("Button tapped")
+            onTapped()
             // Dismiss the dialog
-            dialogView.removeFromSuperview()
+            
         }
         
     }
@@ -98,7 +102,11 @@ class KhaltiPaymentViewController: UIViewController {
             self?.createPaymentWebView()
         }, onError: {[weak self] msg in
             self?.loadingView.stopLoading()
-            self?.showCustomDialog(message: msg)
+            self?.showCustomDialog(message: msg,onTapped: {
+                self?.fetchPaymentDetail()
+                self?.dialogView.removeFromSuperview()
+            }
+            )
         })
     }
     
@@ -109,14 +117,15 @@ class KhaltiPaymentViewController: UIViewController {
             dataStore.removeData(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes(), for: records, completionHandler: {
                 if let myRequest = self.request {
                     self.wkWebView.load(myRequest)
-                   
+                    
+                    
                 }
             })
         }
     }
     
     
-     
+    
     func createPaymentWebView(){
         wkWebView.backgroundColor = UIColor.lightGray
         wkWebView.frame = view.bounds
@@ -144,6 +153,7 @@ class KhaltiPaymentViewController: UIViewController {
         
         if let url = getPaymentUrl(){
             request = URLRequest(url: url)
+            self.loadingView.startLoading()
             loadRequest()
             
         }
@@ -159,9 +169,12 @@ extension KhaltiPaymentViewController :WKNavigationDelegate, WKUIDelegate{
         if let httpResponse = response as? HTTPURLResponse {
             print(httpResponse)
             if httpResponse.statusCode == 200 {
+//                self.loadingView.stopLoading()
                 print("Status code is 200: OK")
+                
                 // Handle the success case
             } else {
+                self.loadingView.stopLoading()
                 print("Status code is not 200: \(httpResponse.statusCode)")
                 // Handle the failure case
             }
@@ -171,6 +184,8 @@ extension KhaltiPaymentViewController :WKNavigationDelegate, WKUIDelegate{
     
     
     func webView(_ webView: WKWebView,didFinish navigation: WKNavigation!) {
+        let khalti = KhaltiGlobal.khalti
+        khalti?.onReturn(khalti!)
         print("3")
     }
     
