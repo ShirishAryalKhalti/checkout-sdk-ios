@@ -10,7 +10,7 @@ import UIKit
 import KhaltiCheckout
 
 class ViewController: UIViewController {
-    
+    var khalti:Khalti?
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,18 +33,22 @@ class ViewController: UIViewController {
         ])
         
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+        
+        khalti = Khalti.init(config: KhaltiPayConfig(publicKey:"live_public_key_979320ffda734d8e9f7758ac39ec775f", pIdx:"EKatER7gGM4ayxk3U2ijmK",environment:Environment.TEST), onPaymentResult: {(paymentResult,khalti) in
+            
+        }, onMessage: {(onMessage,khalti) in
+            
+            
+        }, onReturn: {(khalti) in
+           print("onreturn called")
+        })
     }
     
     
     @objc func buttonTapped() {
         
-        Khalti(config: KhaltiPayConfig(publicKey:"live_public_key_979320ffda734d8e9f7758ac39ec775f", pIdx:"EKatER7gGM4ayxk3U2ijmK",environment:Environment.TEST), onPaymentResult: {(paymentResult,khalti) in
-            
-        }, onMessage: {(onMessage,khalti) in
-            
-        }, onReturn: {(khalti) in
-            
-        })
+        khalti?.open(viewController: self)
+        
         
     }
     
