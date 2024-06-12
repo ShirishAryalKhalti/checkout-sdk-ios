@@ -21,13 +21,11 @@ class KhaltiPaymentViewController: UIViewController {
         super.viewDidLoad()
         
         setupLoadingView()
+        
 //        showCustomDialog()
         loadingView.startLoading()
-        viewModel.getPaymentDetail(onCompletion: { [weak self ] response in
-            self?.loadingView.stopLoading()
-        }, onError: {[weak self] msg in
-            self?.loadingView.stopLoading()
-        })        //        // Set up the toolbar
+        fetchPaymentDetail()
+            //        // Set up the toolbar
         //        let toolbar = UIToolbar(frame: CGRect(x: 0, y: view.frame.size.height - 44, width: view.frame.size.width, height: 44))
         //        toolbar.barStyle = .default
         //        view.addSubview(toolbar)
@@ -45,6 +43,7 @@ class KhaltiPaymentViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    
     private func setupLoadingView() {
         view.addSubview(loadingView)
         loadingView.translatesAutoresizingMaskIntoConstraints = false
@@ -57,7 +56,7 @@ class KhaltiPaymentViewController: UIViewController {
         loadingView.isHidden = true
     }
     
-    private func showCustomDialog(){
+    private func showCustomDialog(message:String){
         let dialogView = CustomDialogView()
         dialogView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(dialogView)
@@ -69,7 +68,7 @@ class KhaltiPaymentViewController: UIViewController {
             dialogView.heightAnchor.constraint(equalToConstant: 200)
         ])
         
-        dialogView.configure(message: "Are you sure you want to continue?", buttonTitle: "OK") {
+        dialogView.configure(message: message, buttonTitle: "OK") {
             print("Button tapped")
             // Dismiss the dialog
             dialogView.removeFromSuperview()
@@ -93,6 +92,16 @@ class KhaltiPaymentViewController: UIViewController {
         return url
     }
     
+    func fetchPaymentDetail(){
+        viewModel.getPaymentDetail(onCompletion: { [weak self ] response in
+            self?.loadingView.stopLoading()
+            self?.createPaymentWebView()
+        }, onError: {[weak self] msg in
+            self?.loadingView.stopLoading()
+            self?.showCustomDialog(message: msg)
+        })
+    }
+    
     func loadRequest() {
         // To clear Cache of WkWebView
         let dataStore = WKWebsiteDataStore.default()
@@ -100,15 +109,14 @@ class KhaltiPaymentViewController: UIViewController {
             dataStore.removeData(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes(), for: records, completionHandler: {
                 if let myRequest = self.request {
                     self.wkWebView.load(myRequest)
-                    self.wkWebView.navigationDelegate = self
-                    self.wkWebView.uiDelegate = self
+                   
                 }
             })
         }
     }
     
     
-    
+     
     func createPaymentWebView(){
         wkWebView.backgroundColor = UIColor.lightGray
         wkWebView.frame = view.bounds
