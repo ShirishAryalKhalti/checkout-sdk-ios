@@ -8,14 +8,21 @@
 import Foundation
 class KhaltiPaymentControllerViewModel {
     
-   let service = KhaltiAPI()
+    let service = KhaltiAPI()
     
     func getPaymentDetail(onCompletion: @escaping ((PaymentDetailModel)->()), onError: @escaping ((String)->())){
-        service.fetchDetail { model in
-            
-        } onError: { msg in
+        if let pIdx = KhaltiGlobal.khaltiConfig?.pIdx {
+            var params = [String:String]()
+            params["pidx"] = pIdx
+            service.fetchDetail(params: params, onCompletion: {(response) in
+                onCompletion(response)
+            }, onError: {(error) in
+                onError(error)
+                
+            })
             
         }
-
+        
+        
     }
 }
