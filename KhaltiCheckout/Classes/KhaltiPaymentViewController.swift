@@ -9,25 +9,29 @@
 import UIKit
 import WebKit
 
+protocol KhaltiPaymentViewControllerProtocol{
+    func fetchPaymentDetail()
+    func verifyPaymentStatus()
+}
+
 class KhaltiPaymentViewController: UIViewController {
-    var wkWebView: WKWebView = WKWebView()
-    var request:URLRequest?
-    var config:KhaltiPayConfig?
-    var onReceived: ((String) -> Void)?
-    let loadingView = CustomLoadingView()
-    let viewModel = KhaltiPaymentControllerViewModel()
-    let dialogView = CustomDialogView()
+    var khalti:Khalti?
+    private var wkWebView: WKWebView = WKWebView()
+    private var request:URLRequest?
+    private var onReceived: ((String) -> Void)?
+    private var loadingView = CustomLoadingView()
+    private var viewModel:KhaltiPaymentControllerViewModel?
+    private let dialogView = CustomDialogView()
     
     // callbacks
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupLoadingView()
-        
+        viewModel = KhaltiPaymentControllerViewModel(khalti:khalti)
         //        showCustomDialog()
-        loadingView.startLoading()
         fetchPaymentDetail()
         //        // Set up the toolbar
         //        let toolbar = UIToolbar(frame: CGRect(x: 0, y: view.frame.size.height - 44, width: view.frame.size.width, height: 44))
@@ -89,6 +93,7 @@ class KhaltiPaymentViewController: UIViewController {
     }
     
     func getPaymentUrl() -> URL?{
+        let config = self.khalti?.config
         let urlEnv = (config?.isProd() ?? false) ?  Url.BASE_PAYMENT_URL_PROD : Url.BASE_PAYMENT_URL_STAGING
         
         let url = URL(string:urlEnv.rawValue)?.appendQueryParams([URLQueryItem(name: "pidx", value: config?.pIdx ?? "")])
@@ -97,7 +102,8 @@ class KhaltiPaymentViewController: UIViewController {
     }
     
     func fetchPaymentDetail(){
-        viewModel.getPaymentDetail(onCompletion: { [weak self ] response in
+        self.loadingView.startLoading()
+        viewModel?.getPaymentDetail(onCompletion: { [weak self ] response in
             self?.loadingView.stopLoading()
             self?.createPaymentWebView()
         }, onError: {[weak self] msg in
@@ -140,7 +146,7 @@ class KhaltiPaymentViewController: UIViewController {
         wkWebView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(wkWebView)
         wkWebView.navigationDelegate = self
-        config = KhaltiGlobal.getKhaltiPayconfig()
+        
         
         
         
@@ -163,26 +169,7 @@ class KhaltiPaymentViewController: UIViewController {
 // MARK: - WebView Delegates function
 
 extension KhaltiPaymentViewController :WKNavigationDelegate, WKUIDelegate{
-    func webView(_ webView: WKWebView, didReceive response: URLResponse, for navigation: WKNavigation!) {
-        print("1")
-        
-        if let httpResponse = response as? HTTPURLResponse {
-            print(httpResponse)
-            if httpResponse.statusCode == 200 {
-//                self.loadingView.stopLoading()
-                print("Status code is 200: OK")
-                
-                // Handle the success case
-            } else {
-                self.loadingView.stopLoading()
-                print("Status code is not 200: \(httpResponse.statusCode)")
-                // Handle the failure case
-            }
-        }
-    }
-    
-    
-    
+
     func webView(_ webView: WKWebView,didFinish navigation: WKNavigation!) {
         let khalti = KhaltiGlobal.khalti
         khalti?.onReturn(khalti!)
@@ -192,7 +179,12 @@ extension KhaltiPaymentViewController :WKNavigationDelegate, WKUIDelegate{
     func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
         print("4")
         if let httpResponse = navigationResponse.response as? HTTPURLResponse {
-            print("HTTP response received with status code: \(httpResponse.statusCode)")
+            if httpResponse.statusCode == 200{
+                if httpResponse.url?.description == httpResponse.url?.description {
+                    
+                }
+            }
+            print("HTTP response received with status code: \(httpResponse.url)")
         }
         decisionHandler(.allow)
     }
@@ -218,4 +210,33 @@ extension KhaltiPaymentViewController :WKNavigationDelegate, WKUIDelegate{
 }
 
 
-
+extension KhaltiPaymentViewController:KhaltiPaymentViewControllerProtocol{
+    func fetchPayment(){
+        viewModel?.getPaymentDetail(onCompletion: { [weak self ] response in
+            self?.loadingView.stopLoading()
+            self?.createPaymentWebView()
+        }, onError: {[weak self] msg in
+            self?.loadingView.stopLoading()
+            self?.showCustomDialog(message: msg,onTapped: {
+                self?.fetchPaymentDetail()
+                self?.dialogView.removeFromSuperview()
+            }
+            )
+        }
+        )
+    }
+    
+    func verifyPaymentStatus() {
+        viewModel?.verifyPaymentStatus(onCompletion: { [weak self ] response in
+            self?.loadingView.stopLoading()
+            
+        }, onError: {[weak self] msg in
+            self?.loadingView.stopLoading()
+            self?.showCustomDialog(message: msg,onTapped: {
+                
+            }
+            )
+        }
+        )
+    }
+}
