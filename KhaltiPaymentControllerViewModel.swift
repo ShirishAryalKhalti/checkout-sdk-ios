@@ -6,12 +6,18 @@
 //
 
 import Foundation
+
 class KhaltiPaymentControllerViewModel {
-    let khalti = KhaltiGlobal.khalti
+    var khalti:Khalti?
+//    let khalti = KhaltiGlobal.khalti
     let service = KhaltiAPI()
     
+    init(khalti:Khalti? = nil) {
+        self.khalti = khalti
+    }
+    
     func getPaymentDetail(onCompletion: @escaping ((PaymentDetailModel)->()), onError: @escaping ((String)->())){
-        let baseUrl = isProd() ? Url.BASE_KHALTI_URL_PROD: Url.BASE_PAYMENT_URL_STAGING
+        let baseUrl = isProd() ? Url.BASE_KHALTI_URL_PROD: Url.BASE_KHALTI_URL_STAGING
         
         let url = baseUrl.appendUrl(url: Url.PAYMENT_DETAIL)
         if let pIdx = KhaltiGlobal.khaltiConfig?.pIdx {
