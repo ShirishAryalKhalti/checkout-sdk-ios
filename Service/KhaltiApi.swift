@@ -54,8 +54,24 @@ class KhaltiAPI {
         let configuration = URLSessionConfiguration.ephemeral
         let session = URLSession(configuration: configuration, delegate: nil, delegateQueue: OperationQueue.main)
         let request = self.createRequest(for: url,body: params)
-        
-        self.handleRequest(request: request, onSuccess: {(model)in
+        print("===========================================================")
+        print("Request Url:")
+        print (request.url)
+        print("===========================================================")
+        if let bodyData = request.httpBody {
+            if let bodyString = String(data: bodyData, encoding: .utf8) {
+                
+                print("===========================================================")
+                print("Request httpBody:")
+                print(bodyString)
+                print("===========================================================")
+            } else {
+                print("Request httpBody is not a valid UTF-8 string.")
+            }
+        } else {
+            print("Request does not contain a httpBody.")
+        }
+        self.handleRequest(request: request, onSuccess: {(model:PaymentDetailModel)in
             onCompletion(model)
         }, onError: {(error) in
             onError(error)
@@ -74,8 +90,24 @@ class KhaltiAPI {
         let configuration = URLSessionConfiguration.ephemeral
         let session = URLSession(configuration: configuration, delegate: nil, delegateQueue: OperationQueue.main)
         let request = self.createRequest(for: url,body: params)
-        
-        self.handleRequest(request: request, onSuccess: {(model)in
+        print("===========================================================")
+        print("Request Url:")
+        print (request.url)
+        print("===========================================================")
+        if let bodyData = request.httpBody {
+            if let bodyString = String(data: bodyData, encoding: .utf8) {
+            
+                print("===========================================================")
+                print("Request httpBody:")
+                print(bodyString)
+                print("===========================================================")
+            } else {
+                print("Request httpBody is not a valid UTF-8 string.")
+            }
+        } else {
+            print("Request does not contain a httpBody.")
+        }
+        self.handleRequest(request: request, onSuccess: {(model:PaymentDetailModel)in
             onCompletion(model)
         }, onError: {(error) in
             onError(error)
@@ -129,7 +161,7 @@ class KhaltiAPI {
 }
 
 extension KhaltiAPI:KhaltiApiServiceProtocol{
-    func handleRequest<T>(request: URLRequest, onSuccess: @escaping (T) -> (), onError: @escaping (String) -> ()) where T : Decodable, T : Encodable {
+    func handleRequest<T:Codable>(request: URLRequest, onSuccess: @escaping (T) -> (), onError: @escaping (String) -> ()) {
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
                 onError("Request failed with error: \(error.localizedDescription)")
@@ -140,13 +172,20 @@ extension KhaltiAPI:KhaltiApiServiceProtocol{
                 onError("No data received")
                 return
             }
+            print("===========================================================")
+            print("Received JSON data:", String(data: data, encoding: .utf8) ?? "Invalid UTF-8 data")
+            print("===========================================================")
+            
             
             do {
                 let decoder = JSONDecoder()
-                let decodedObject = try decoder.decode(T.self, from: data)
+                let decodedObject:T = try decoder.decode(T.self, from: data)
                 onSuccess(decodedObject)
             } catch let decodingError {
-                onError("Failed to decode response: \(decodingError.localizedDescription)")
+                print("===========================================================")
+                print(decodingError)
+                print("===========================================================")
+                onError("Failed to decode response")
             }
         }
         task.resume()
