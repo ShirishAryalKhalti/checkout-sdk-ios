@@ -23,16 +23,13 @@ class KhaltiPaymentViewController: UIViewController {
     private var viewModel:KhaltiPaymentControllerViewModel?
     private let dialogView = CustomDialogView()
     
-    // callbacks
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLoadingView()
         viewModel = KhaltiPaymentControllerViewModel(khalti:khalti)
         //        showCustomDialog()
-        fetchPaymentDetail()
+        self.fetchPaymentDetail()
         //        // Set up the toolbar
         //        let toolbar = UIToolbar(frame: CGRect(x: 0, y: view.frame.size.height - 44, width: view.frame.size.width, height: 44))
         //        toolbar.barStyle = .default
@@ -101,21 +98,7 @@ class KhaltiPaymentViewController: UIViewController {
         return url
     }
     
-    func fetchPaymentDetail(){
-        self.loadingView.startLoading()
-        viewModel?.getPaymentDetail(onCompletion: { [weak self ] response in
-            self?.loadingView.stopLoading()
-            self?.createPaymentWebView()
-        }, onError: {[weak self] msg in
-            self?.loadingView.stopLoading()
-            self?.showCustomDialog(message: msg,onTapped: {
-                self?.fetchPaymentDetail()
-                self?.dialogView.removeFromSuperview()
-            }
-            )
-        })
-    }
-    
+
     func loadRequest() {
         // To clear Cache of WkWebView
         let dataStore = WKWebsiteDataStore.default()
@@ -211,31 +194,44 @@ extension KhaltiPaymentViewController :WKNavigationDelegate, WKUIDelegate{
 
 
 extension KhaltiPaymentViewController:KhaltiPaymentViewControllerProtocol{
-    func fetchPayment(){
+    func fetchPaymentDetail(){
+        self.loadingView.startLoading()
         viewModel?.getPaymentDetail(onCompletion: { [weak self ] response in
-            self?.loadingView.stopLoading()
-            self?.createPaymentWebView()
-        }, onError: {[weak self] msg in
-            self?.loadingView.stopLoading()
-            self?.showCustomDialog(message: msg,onTapped: {
-                self?.fetchPaymentDetail()
-                self?.dialogView.removeFromSuperview()
+            DispatchQueue.main.async {
+                self?.loadingView.stopLoading()
+                self?.createPaymentWebView()
             }
-            )
+           
+        }, onError: {[weak self] msg in
+            DispatchQueue.main.async{
+                self?.loadingView.stopLoading()
+                self?.showCustomDialog(message: msg,onTapped: {
+                    self?.fetchPaymentDetail()
+                    self?.dialogView.removeFromSuperview()
+                }
+                )
+            }
+          
         }
         )
     }
     
     func verifyPaymentStatus() {
+        self.loadingView.startLoading()
         viewModel?.verifyPaymentStatus(onCompletion: { [weak self ] response in
-            self?.loadingView.stopLoading()
+            DispatchQueue.main.async {
+                self?.loadingView.stopLoading()
+            }
             
         }, onError: {[weak self] msg in
-            self?.loadingView.stopLoading()
-            self?.showCustomDialog(message: msg,onTapped: {
-                
+            DispatchQueue.main.async {
+                self?.loadingView.stopLoading()
+                self?.showCustomDialog(message: msg,onTapped: {
+                    
+                }
+                )
             }
-            )
+            
         }
         )
     }
