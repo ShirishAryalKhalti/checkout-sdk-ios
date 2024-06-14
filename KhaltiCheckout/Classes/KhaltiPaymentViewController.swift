@@ -22,6 +22,7 @@ class KhaltiPaymentViewController: UIViewController {
     private var loadingView = CustomLoadingView()
     private var viewModel:KhaltiPaymentControllerViewModel?
     private let dialogView = CustomDialogView()
+    var returnUrl:String?
     
     
     override func viewDidLoad() {
@@ -98,7 +99,7 @@ class KhaltiPaymentViewController: UIViewController {
         return url
     }
     
-
+    
     func loadRequest() {
         // To clear Cache of WkWebView
         let dataStore = WKWebsiteDataStore.default()
@@ -152,22 +153,20 @@ class KhaltiPaymentViewController: UIViewController {
 // MARK: - WebView Delegates function
 
 extension KhaltiPaymentViewController :WKNavigationDelegate, WKUIDelegate{
-
+    
     func webView(_ webView: WKWebView,didFinish navigation: WKNavigation!) {
         let khalti = KhaltiGlobal.khalti
-        khalti?.onReturn(khalti!)
         print("3")
     }
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
         print("4")
         if let httpResponse = navigationResponse.response as? HTTPURLResponse {
-            if httpResponse.statusCode == 200{
-                if httpResponse.url?.description == httpResponse.url?.description {
-                    
-                }
+            if let returnUrl ,(httpResponse.url?.description ?? "") .contains(returnUrl) {
+                print("onReturn matched")
+                self.verifyPaymentStatus()
+                
             }
-            print("HTTP response received with status code: \(httpResponse.url)")
         }
         decisionHandler(.allow)
     }
@@ -197,11 +196,12 @@ extension KhaltiPaymentViewController:KhaltiPaymentViewControllerProtocol{
     func fetchPaymentDetail(){
         self.loadingView.startLoading()
         viewModel?.getPaymentDetail(onCompletion: { [weak self ] response in
+            self?.returnUrl = response.returnUrl
             DispatchQueue.main.async {
                 self?.loadingView.stopLoading()
                 self?.createPaymentWebView()
             }
-           
+            
         }, onError: {[weak self] msg in
             DispatchQueue.main.async{
                 self?.loadingView.stopLoading()
@@ -211,7 +211,7 @@ extension KhaltiPaymentViewController:KhaltiPaymentViewControllerProtocol{
                 }
                 )
             }
-          
+            
         }
         )
     }
@@ -221,16 +221,12 @@ extension KhaltiPaymentViewController:KhaltiPaymentViewControllerProtocol{
         viewModel?.verifyPaymentStatus(onCompletion: { [weak self ] response in
             DispatchQueue.main.async {
                 self?.loadingView.stopLoading()
+                self?.khalti?.onPaymentResult(response, khalti)
+//                self?.khalti?.onPaymentResult()
             }
             
         }, onError: {[weak self] msg in
-            DispatchQueue.main.async {
-                self?.loadingView.stopLoading()
-                self?.showCustomDialog(message: msg,onTapped: {
-                    
-                }
-                )
-            }
+          
             
         }
         )
