@@ -8,7 +8,7 @@
 import Foundation
 
 struct PaymentDetailModel: Codable {
-    let returnUrl: String
+    let returnUrl: String?
     
     enum CodingKeys: String, CodingKey {
         case returnUrl = "return_url"
