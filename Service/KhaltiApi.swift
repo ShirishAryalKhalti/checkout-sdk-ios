@@ -11,7 +11,7 @@ protocol KhaltiApiServiceProtocol {
     func handleRequest<T: Codable>(request: URLRequest, onSuccess: @escaping (T) -> (), onError: @escaping (String) -> ())
 }
 
-class KhaltiAPI {
+class KhaltiAPIService {
     
     //    static let shared = KhaltiAPI()
     //    static let logMessage:Bool = Khalti.shared.debugLog
@@ -80,7 +80,7 @@ class KhaltiAPI {
     }
     
     
-    func fetchPaymentStatus(url:String,params:[String:String],onCompletion: @escaping ((PaymentDetailModel)->()), onError: @escaping ((String)->())) {
+    func fetchPaymentStatus(url:String,params:[String:String],onCompletion: @escaping ((PaymentLoadModel)->()), onError: @escaping ((String)->())) {
         
         guard let url = URL(string: url) else {
             onError("Error on parsing Url")
@@ -107,7 +107,7 @@ class KhaltiAPI {
         } else {
             print("Request does not contain a httpBody.")
         }
-        self.handleRequest(request: request, onSuccess: {(model:PaymentDetailModel)in
+        self.handleRequest(request: request, onSuccess: {(model:PaymentLoadModel)in
             onCompletion(model)
         }, onError: {(error) in
             onError(error)
@@ -160,7 +160,7 @@ class KhaltiAPI {
     
 }
 
-extension KhaltiAPI:KhaltiApiServiceProtocol{
+extension KhaltiAPIService:KhaltiApiServiceProtocol{
     func handleRequest<T:Codable>(request: URLRequest, onSuccess: @escaping (T) -> (), onError: @escaping (String) -> ()) {
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {

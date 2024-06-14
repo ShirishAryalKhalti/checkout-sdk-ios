@@ -10,7 +10,7 @@ import Foundation
 class KhaltiPaymentControllerViewModel {
     var khalti:Khalti?
 //    let khalti = KhaltiGlobal.khalti
-    let service = KhaltiAPI()
+    let service = KhaltiAPIService()
     
     init(khalti:Khalti? = nil) {
         self.khalti = khalti
@@ -35,8 +35,21 @@ class KhaltiPaymentControllerViewModel {
         
     }
     
-    func verifyPaymentStatus(onCompletion:@escaping((PaymentDetailModel)->()),onError: @escaping ((String)->())){
+    func verifyPaymentStatus(onCompletion:@escaping((PaymentLoadModel)->()),onError: @escaping ((String)->())){
+        let baseUrl = isProd() ? Url.BASE_PAYMENT_URL_PROD: Url.BASE_PAYMENT_URL_STAGING
         
+        let url = baseUrl.appendUrl(url: Url.LOOKUP_SDK)
+        if let pIdx = KhaltiGlobal.khaltiConfig?.pIdx {
+            var params = [String:String]()
+            params["pidx"] = pIdx
+            service.fetchPaymentStatus(url:url,params: params, onCompletion: {(response) in
+                onCompletion(response)
+            }, onError: {(error) in
+                onError(error)
+                
+            })
+            
+        }
         
     }
     
