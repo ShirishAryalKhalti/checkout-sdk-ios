@@ -8,6 +8,9 @@
 
 import UIKit
 import WebKit
+extension Notification.Name {
+    static let notificationAction = Notification.Name("close")
+}
 
 protocol KhaltiPaymentViewControllerProtocol{
     func fetchPaymentDetail()
@@ -46,6 +49,8 @@ class KhaltiPaymentViewController: UIViewController {
         
         //        createPaymentWebView()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(handleNotification), name: .notificationAction, object: nil)
+        
         // Do any additional setup after loading the view.
     }
     
@@ -60,6 +65,11 @@ class KhaltiPaymentViewController: UIViewController {
             loadingView.heightAnchor.constraint(equalToConstant: 100)
         ])
         loadingView.isHidden = true
+    }
+    
+    
+    @objc func handleNotification(notification: Notification) {
+        self.dismiss(animated: true)
     }
     
     private func showCustomDialog(message:String,onTapped:@escaping () -> Void){
@@ -80,6 +90,11 @@ class KhaltiPaymentViewController: UIViewController {
             
         }
         
+    }
+    
+    deinit {
+        // Remove observer
+        NotificationCenter.default.removeObserver(self, name: .notificationAction, object: nil)
     }
     
     @objc func backButtonTapped() {
@@ -221,8 +236,8 @@ extension KhaltiPaymentViewController:KhaltiPaymentViewControllerProtocol{
         viewModel?.verifyPaymentStatus(onCompletion: { [weak self ] response in
             DispatchQueue.main.async {
                 self?.loadingView.stopLoading()
-                self?.khalti?.onPaymentResult(response, khalti)
-//                self?.khalti?.onPaymentResult()
+                self?.khalti?.onPaymentResult(PaymentResult(status: response.status, payload: response), self?.khalti!)
+
             }
             
         }, onError: {[weak self] msg in
