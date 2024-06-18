@@ -6,9 +6,9 @@
 //
 
 import Foundation
-public typealias OnPaymentResult = (PaymentResult,Khalti) -> ()
-public typealias OnMessageResult = (OnMessage,Khalti) -> ()
-public typealias OnReturn = (Khalti) -> ()
+public typealias OnPaymentResult = (PaymentResult,Khalti?) -> ()
+public typealias OnMessageResult = (OnMessage,Khalti?) -> ()
+public typealias OnReturn = (Khalti?) -> ()
 
 
 public class Khalti{
@@ -23,6 +23,7 @@ public class Khalti{
         self.onPaymentResult = onPaymentResult
         self.onMessage = onMessage
         self.onReturn = onReturn
+        KhaltiGlobal.setKhalti(khalti: self)
         KhaltiGlobal.setKhaltiPayconfig(config: self.config)
     }
     
@@ -43,12 +44,19 @@ public class Khalti{
     
     
     
-    public func open(viewController:UIViewController){
+   @objc public func open(viewController:UIViewController){
         let vc = KhaltiPaymentViewController()
-        //            vc.modalPresentationStyle = .fullScreen
-        
+        vc.khalti = self
+        vc.modalPresentationStyle = .fullScreen
         viewController.present(vc, animated:true)
         
     }
+    
+    @objc public func close(){
+        NotificationCenter.default.post(name: .notificationAction, object: nil)
+        
+    }
+    
+    
     
 }
