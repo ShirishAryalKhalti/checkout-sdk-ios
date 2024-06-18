@@ -15,7 +15,11 @@ enum Url:String {
     case PAYMENT_DETAIL = "epayment/detail/"
     case LOOKUP_SDK = "epayment/lookup-sdk/"
     
-    func appendBaseUrl(url:String) -> String{
-        return self.rawValue + url
+    func appendUrl(url:Url) -> String{
+        return self.rawValue + url.rawValue
     }
+    
+
+    
+    
 }
