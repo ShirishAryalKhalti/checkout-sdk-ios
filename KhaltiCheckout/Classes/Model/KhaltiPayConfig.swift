@@ -21,7 +21,7 @@ public class KhaltiPayConfig: NSObject {
         self.environment = environment
     }
     
-    public func copyWith( publicKey: String? = nil,pIdx:String? = nil,openInKhalti:Bool? = false,environmnet:Environment? = nil) -> KhaltiPayConfig{
+    public func copyWith( publicKey: String? = nil,pIdx:String? = nil,openInKhalti:Bool? = false,environment:Environment? = nil) -> KhaltiPayConfig{
         return KhaltiPayConfig(
             publicKey: publicKey ?? self.publicKey,
             pIdx: pIdx ?? self.pIdx,
@@ -46,9 +46,12 @@ public class KhaltiPayConfig: NSObject {
     func getEnvironment() -> Environment{
         return self.environment
     }
+    
     func isProd() -> Bool{
         return self.environment == Environment.PROD
     }
+    
+    
     
 }
 
