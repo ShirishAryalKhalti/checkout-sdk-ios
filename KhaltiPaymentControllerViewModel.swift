@@ -17,8 +17,8 @@ class KhaltiPaymentControllerViewModel {
     }
     
     func getPaymentDetail(onCompletion: @escaping ((PaymentDetailModel)->()), onError: @escaping ((String)->())){
-        let baseUrl = isProd() ? Url.BASE_KHALTI_URL_PROD: Url.BASE_KHALTI_URL_STAGING
-        
+        let baseUrl = getBaseUrl()
+
         let url = baseUrl.appendUrl(url: Url.PAYMENT_DETAIL)
         if let pIdx = KhaltiGlobal.khaltiConfig?.pIdx {
             var params = [String:String]()
@@ -36,7 +36,7 @@ class KhaltiPaymentControllerViewModel {
     }
     
     func verifyPaymentStatus(onCompletion:@escaping((PaymentLoadModel)->()),onError: @escaping ((String)->())){
-        let baseUrl = isProd() ? Url.BASE_PAYMENT_URL_PROD: Url.BASE_PAYMENT_URL_STAGING
+        let baseUrl = getBaseUrl()
         
         let url = baseUrl.appendUrl(url: Url.LOOKUP_SDK)
         if let pIdx = KhaltiGlobal.khaltiConfig?.pIdx {
@@ -53,7 +53,9 @@ class KhaltiPaymentControllerViewModel {
         
     }
     
-    private func isProd() ->Bool{
-        khalti?.config.isProd() ?? false
+    private func getBaseUrl() ->Url{
+        let isProd = khalti?.config.isProd() ?? false
+        let baseUrl = isProd ? Url.BASE_KHALTI_URL_PROD: Url.BASE_KHALTI_URL_STAGING
+        return baseUrl
     }
 }
