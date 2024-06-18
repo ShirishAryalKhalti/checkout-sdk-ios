@@ -9,7 +9,7 @@ import Foundation
 
 public class OnMessage {
     private var onMesagePayload:((OnMessagePayload,Khalti) -> ())
-    init(onMesagePayload: @escaping (OnMessagePayload, Khalti) -> Void) {
+    init(onMesagePayload: @escaping (OnMessagePayload, Khalti?) -> Void) {
         self.onMesagePayload = onMesagePayload
     }
 }
