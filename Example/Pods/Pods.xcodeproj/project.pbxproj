@@ -15,6 +15,8 @@
 		047E49A62C25465F0016E55B /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047E49A32C25465F0016E55B /* NetworkMonitor.swift */; };
 		047E49AA2C2546D00016E55B /* CustomDialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047E49A72C2546D00016E55B /* CustomDialogView.swift */; };
 		047E49AB2C2546D00016E55B /* CustomLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047E49A82C2546D00016E55B /* CustomLoadingView.swift */; };
+		04B9296C2C259A860018F251 /* ErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B9296B2C259A860018F251 /* ErrorModel.swift */; };
+		04B9296E2C25A10A0018F251 /* KhaltiPaymentViewDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B9296D2C25A10A0018F251 /* KhaltiPaymentViewDataModel.swift */; };
 		0511CAD20D3920C8E0888AFD5CD1C1BF /* Khalti.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD224B072246D3936F0D290B26337B94 /* Khalti.swift */; };
 		057C1964EBAFCBC649F8012723CDADF5 /* SatisfyAnyOf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B45B8866F896A1D4E16EA269D1491D9 /* SatisfyAnyOf.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		0650AF0DB8DE333CE5D99D704E29AC02 /* AllPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C812F0487069FBA5FF9D97D402282D5A /* AllPass.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
@@ -66,7 +68,6 @@
 		5B70B7A48D33851645A970DA8AD85CD6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA8B94E9D3B433157168D1EECCEC11CD /* Foundation.framework */; };
 		5DE358B668148D244DB531CE03A81D84 /* Quick.h in Headers */ = {isa = PBXBuildFile; fileRef = 359E7C21BBBD97FDD8EF230E728EBC17 /* Quick.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5EF6EFECFFACDAC3106426E2AC9A4428 /* Pods-KhaltiCheckout_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F9CEBCE2742F38A119A834F5B6F4B3 /* Pods-KhaltiCheckout_Example-dummy.m */; };
-		5FECBD3C5F83B188A8BE0441DEC55136 /* KhaltiGlobal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9E3D4EEA27CFE23210E23A6E1D02B6 /* KhaltiGlobal.swift */; };
 		60A059AA3734D5D3F2F73D07C427F4C1 /* NMBExceptionCapture.h in Headers */ = {isa = PBXBuildFile; fileRef = 64227384F069F8A52D461F322BAF5D47 /* NMBExceptionCapture.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		61F1ADB6BE662783C1A01C2C1720A9BE /* Expression.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC8BA495BA58C8DC9FDC464CC417DAC /* Expression.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		654580360E6694D7F7CE85CE5390DA79 /* PostNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D335D127BFE948665844D835FADC97 /* PostNotification.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
@@ -188,6 +189,8 @@
 		047E49A32C25465F0016E55B /* NetworkMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		047E49A72C2546D00016E55B /* CustomDialogView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomDialogView.swift; sourceTree = "<group>"; };
 		047E49A82C2546D00016E55B /* CustomLoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLoadingView.swift; sourceTree = "<group>"; };
+		04B9296B2C259A860018F251 /* ErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorModel.swift; sourceTree = "<group>"; };
+		04B9296D2C25A10A0018F251 /* KhaltiPaymentViewDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KhaltiPaymentViewDataModel.swift; sourceTree = "<group>"; };
 		04BF570E93828226BFA1B417615610E0 /* KhaltiCheckout.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = KhaltiCheckout.debug.xcconfig; sourceTree = "<group>"; };
 		0533BA6060A6659B1A5405E417AD4BC1 /* QCKDSL.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QCKDSL.h; path = Sources/QuickObjectiveC/DSL/QCKDSL.h; sourceTree = "<group>"; };
 		08038AD837D92EC9FA5A729BA9AB09C4 /* QCKDSL.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = QCKDSL.m; path = Sources/QuickObjectiveC/DSL/QCKDSL.m; sourceTree = "<group>"; };
@@ -212,7 +215,6 @@
 		24BC97B8588E96F2D0B84DEC0E412F58 /* Quick-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Quick-dummy.m"; sourceTree = "<group>"; };
 		2662C875266ABF8B04F0311C33B89368 /* CwlBadInstructionException.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CwlBadInstructionException.swift; path = Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/CwlBadInstructionException.swift; sourceTree = "<group>"; };
 		29993AAD2DB29F0F1CC0B0D278EFB39E /* AssertionDispatcher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AssertionDispatcher.swift; path = Sources/Nimble/Adapters/AssertionDispatcher.swift; sourceTree = "<group>"; };
-		2A9E3D4EEA27CFE23210E23A6E1D02B6 /* KhaltiGlobal.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = KhaltiGlobal.swift; sourceTree = "<group>"; };
 		2BA67B27414648724145E9E1EE2FE488 /* PaymentDetailModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PaymentDetailModel.swift; sourceTree = "<group>"; };
 		2BF6A79D0B0B4FF82EA2A87EB9BBE01D /* NSBundle+CurrentTestBundle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSBundle+CurrentTestBundle.swift"; path = "Sources/Quick/NSBundle+CurrentTestBundle.swift"; sourceTree = "<group>"; };
 		2C5B911FA2A290D558ABF9998CFD82FD /* BeLessThanOrEqual.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BeLessThanOrEqual.swift; path = Sources/Nimble/Matchers/BeLessThanOrEqual.swift; sourceTree = "<group>"; };
@@ -435,6 +437,7 @@
 			isa = PBXGroup;
 			children = (
 				047E499E2C25421B0016E55B /* KhaltiPaymentViewModel.swift */,
+				04B9296D2C25A10A0018F251 /* KhaltiPaymentViewDataModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -478,7 +481,6 @@
 			children = (
 				047E49AC2C25486C0016E55B /* Extensions */,
 				A199F90216931328D24D03A4443ADB7A /* ErrorType.swift */,
-				2A9E3D4EEA27CFE23210E23A6E1D02B6 /* KhaltiGlobal.swift */,
 				84A2551CAACA1ADB3E13D224C1591D29 /* OnMessageEvent.swift */,
 				1CD78560F7D9A1E7B58F035934FC158B /* OnMessagePayload.swift */,
 				3C3FC781CE57870A9FB814F3A2EA0974 /* Url.swift */,
@@ -569,6 +571,7 @@
 				2BA67B27414648724145E9E1EE2FE488 /* PaymentDetailModel.swift */,
 				9F7ABD84D3A97122E3DABF318DFB89C1 /* PaymentLoadModel.swift */,
 				D42F6F72BC255F6F930518FF2931963E /* PaymentResult.swift */,
+				04B9296B2C259A860018F251 /* ErrorModel.swift */,
 			);
 			name = Model;
 			path = KhaltiCheckout/Classes/Model;
@@ -1104,16 +1107,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04B9296C2C259A860018F251 /* ErrorModel.swift in Sources */,
 				B43A0783EB4812459A4BC105658066A8 /* AnyCodable.swift in Sources */,
 				BDDE81B0C2759F6586A95F37303523A3 /* Environment.swift in Sources */,
 				3F69557BA85D524563A077FB42C5948E /* ErrorType.swift in Sources */,
 				0511CAD20D3920C8E0888AFD5CD1C1BF /* Khalti.swift in Sources */,
 				72F494D16F820DFDB09AFAE95C546807 /* KhaltiCheckout-dummy.m in Sources */,
 				35F470048636C5272A154089A23B5A94 /* KhaltiCheckoutExtensions.swift in Sources */,
-				5FECBD3C5F83B188A8BE0441DEC55136 /* KhaltiGlobal.swift in Sources */,
 				047E49AB2C2546D00016E55B /* CustomLoadingView.swift in Sources */,
 				A93352DBED784A7D6D41466A47E8EED9 /* KhaltiPayConfig.swift in Sources */,
 				325F5AEAF1E0FE552B5D60232D731CD1 /* KhaltiPaymentViewController.swift in Sources */,
+				04B9296E2C25A10A0018F251 /* KhaltiPaymentViewDataModel.swift in Sources */,
 				3A7D750A02A4026AC8731F09BE167D7A /* OnMessage.swift in Sources */,
 				457A795E5C9E262AA215E44EF3EDAEE2 /* OnMessageEvent.swift in Sources */,
 				047E49A52C25465F0016E55B /* KhaltiApi.swift in Sources */,
