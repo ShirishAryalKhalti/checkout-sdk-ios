@@ -160,7 +160,7 @@ class KhaltiPaymentViewController: UIViewController {
     private func loadUrl(){
         if let url = getPaymentUrl(){
 //        request = URLRequest(url: url)
-            request = URLRequest(url:URL(string:"asdfasd.com")!)
+            request = URLRequest(url:url)
             self.startLoadingView()
 
             loadRequest()
