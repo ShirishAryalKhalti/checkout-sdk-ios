@@ -23,8 +23,6 @@ public class Khalti{
         self.onPaymentResult = onPaymentResult
         self.onMessage = onMessage
         self.onReturn = onReturn
-////        KhaltiGlobal.setKhalti(khalti: self)
-////        KhaltiGlobal.setKhaltiPayconfig(config: self.config)
     }
     
     
