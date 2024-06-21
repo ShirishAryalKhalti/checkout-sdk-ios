@@ -26,21 +26,22 @@ class KhaltiPaymentControllerViewModel {
             if let pIdx = khalti?.config.pIdx {
                 var params = [String:String]()
                 params["pidx"] = pIdx
-                service.fetchDetail(url:url,params: params, onCompletion: {[weak self](response) in
+                service.fetchDetail(url:url,params: params, onCompletion: {(response) in
                     onCompletion(response)
                     
-                }, onError: {(error) in
-                    onError(error)
+                }, onError: {[weak self](error) in
+                    self?.createViewModelData(error: error, isPayment: false)
+//                    onError(error)
                 })
             }
             
         }else{
-            handleNetworkConnectivityFailure()
+            handleNetworkConnectivityFailure(onMessagePayload: OnMessagePayload(event: OnMessageEvent.NetworkFailure, message: "Network Error"))
         }
         
     }
     
-    func verifyPaymentStatus(onCompletion:@escaping((PaymentLoadModel)->()),onError: @escaping ((String)->())){
+    func verifyPaymentStatus(onCompletion:@escaping((PaymentLoadModel)->()),onError: @escaping (()->())){
         let baseUrl = getBaseUrl()
         if isNetworkReachable(){
             let url = baseUrl.appendUrl(url: Url.LOOKUP_SDK)
@@ -49,21 +50,27 @@ class KhaltiPaymentControllerViewModel {
                 params["pidx"] = pIdx
                 service.fetchPaymentStatus(url:url,params: params, onCompletion: {(response) in
                     onCompletion(response)
-                }, onError: {(error) in
-                    onError(error)
+                }, onError: {[weak self](error) in
+                    self?.createViewModelData(error: error, isPayment: true)
+//                    onError(error.errorTyp)
                     
                 })
                 
             }
         }else{
-            handleNetworkConnectivityFailure()
+            handleNetworkConnectivityFailure(onMessagePayload: OnMessagePayload(event: OnMessageEvent.NetworkFailure, message: "Network Error"))
         }
         
         
     }
     
-    private func handleNetworkConnectivityFailure(){
-        khalti?.onMessage(OnMessagePayload(event: OnMessageEvent.NetworkFailure, message: "Network Failure"),khalti)
+    private func createViewModelData(error:ErrorModel,isPayment:Bool){
+        let viewModelData = KhaltiPaymentViewDataModel(errorModel:error,isPayment:isPayment )
+        
+    }
+    
+    private func handleNetworkConnectivityFailure(onMessagePayload:OnMessagePayload){
+        khalti?.onMessage(onMessagePayload,khalti)
     }
     
     private func isNetworkReachable() -> Bool{
