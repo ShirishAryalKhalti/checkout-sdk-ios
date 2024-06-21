@@ -11,7 +11,6 @@ class CustomLoadingView: UIView {
     
     private let loadingLabel: UILabel = {
         let label = UILabel()
-        label.text = "Loading..."
         label.textAlignment = .center
         label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false

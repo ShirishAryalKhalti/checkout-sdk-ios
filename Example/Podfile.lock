@@ -18,7 +18,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  KhaltiCheckout: f6e2d41a04aeefaf34cd9429a5429dac75d81690
+  KhaltiCheckout: 5a85481567580d724ff4d3b3551df84d19f0e178
   Nimble: 5316ef81a170ce87baf72dd961f22f89a602ff84
   Quick: f5754d69b7013f5864c29aab9ae6f0c79c5bc200
 
