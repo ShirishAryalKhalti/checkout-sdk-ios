@@ -9,7 +9,7 @@ import Foundation
 import Network
 
 protocol KhaltiApiServiceProtocol {
-    func handleRequest<T: Codable>(request: URLRequest, onSuccess: @escaping (T) -> (), onError: @escaping (String) -> ())
+    func handleRequest<T: Codable>(request: URLRequest, onSuccess: @escaping (T) -> (), onError: @escaping (ErrorModel) -> ())
 }
 
 class KhaltiAPIService {
@@ -38,36 +38,14 @@ class KhaltiAPIService {
         return request
     }
     
-    func fetchDetail(url:String,params:[String:String],onCompletion: @escaping ((PaymentDetailModel)->()), onError: @escaping ((String)->())) {
+    func fetchDetail(url:String,params:[String:String],onCompletion: @escaping ((PaymentDetailModel)->()), onError: @escaping ((ErrorModel)->())) {
         
         guard let url = URL(string:url) else {
-            onError("Error on parsing Url")
+            onError(ErrorModel(errorType:FailureType.Httpcall))
             return
         }
-        
-        let configuration = URLSessionConfiguration.ephemeral
-        let session = URLSession(configuration: configuration, delegate: nil, delegateQueue: OperationQueue.main)
+
         let request = self.createRequest(for: url,body: params)
-        print("===========================================================")
-        print("Request Url:")
-        print (request.url)
-        print(request.allHTTPHeaderFields)
-        print("===========================================================")
-        
-        if let bodyData = request.httpBody {
-            if let bodyString = String(data: bodyData, encoding: .utf8) {
-                
-                print("===========================================================")
-                print("Request httpBody:")
-                print(bodyString)
-                
-                print("===========================================================")
-            } else {
-                print("Request httpBody is not a valid UTF-8 string.")
-            }
-        } else {
-            print("Request does not contain a httpBody.")
-        }
         self.handleRequest(request: request, onSuccess: {(model:PaymentDetailModel)in
             onCompletion(model)
         }, onError: {(error) in
@@ -77,35 +55,16 @@ class KhaltiAPIService {
     }
     
     
-    func fetchPaymentStatus(url:String,params:[String:String],onCompletion: @escaping ((PaymentLoadModel)->()), onError: @escaping ((String)->())) {
+    func fetchPaymentStatus(url:String,params:[String:String],onCompletion: @escaping ((PaymentLoadModel)->()), onError: @escaping ((ErrorModel)->())) {
         
         guard let url = URL(string: url) else {
-            onError("Error on parsing Url")
+            
             return
         }
         
-        let configuration = URLSessionConfiguration.ephemeral
-        let session = URLSession(configuration: configuration, delegate: nil, delegateQueue: OperationQueue.main)
-        let request = self.createRequest(for: url,body: params)
-        print("===========================================================")
-        print("Request Url:")
-        print (request.url)
-        print(request.allHTTPHeaderFields)
 
-        print("===========================================================")
-        if let bodyData = request.httpBody {
-            if let bodyString = String(data: bodyData, encoding: .utf8) {
-            
-                print("===========================================================")
-                print("Request httpBody:")
-                print(bodyString)
-                print("===========================================================")
-            } else {
-                print("Request httpBody is not a valid UTF-8 string.")
-            }
-        } else {
-            print("Request does not contain a httpBody.")
-        }
+        let request = self.createRequest(for: url,body: params)
+
         self.handleRequest(request: request, onSuccess: {(model:PaymentLoadModel)in
             onCompletion(model)
         }, onError: {(error) in
@@ -118,35 +77,88 @@ class KhaltiAPIService {
 
 extension KhaltiAPIService:KhaltiApiServiceProtocol{
     
-    func handleRequest<T:Codable>(request: URLRequest, onSuccess: @escaping (T) -> (), onError: @escaping (String) -> ()) {
-
+    func handleRequest<T:Codable>(request: URLRequest, onSuccess: @escaping (T) -> (), onError: @escaping (ErrorModel) -> ()) {
+        print("===========================================================")
+        print("Request Url:")
+        print (request.url)
+        print(request.allHTTPHeaderFields)
+        
+        print("===========================================================")
+        if let bodyData = request.httpBody {
+            if let bodyString = String(data: bodyData, encoding: .utf8) {
+                
+                print("===========================================================")
+                print("Request httpBody:")
+                print(bodyString)
+                print("===========================================================")
+            } else {
+                print("Request httpBody is not a valid UTF-8 string.")
+            }
+        } else {
+            print("Request does not contain a httpBody.")
+        }
     
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
                 print(error)
-                onError("Request failed with error: \(error.localizedDescription)")
+                onError(ErrorModel(errorType:FailureType.Generic))
                 return
             }
             
             guard let data = data else {
-                onError("No data received")
+//                onError("No data received")
                 return
             }
+            
+            // Ensure response is an HTTPURLResponse and check the status code
+            guard let httpResponse = response as? HTTPURLResponse else {
+                onError(ErrorModel(errorType:FailureType.Httpcall))
+                return
+            }
+            
+            let statusCode = httpResponse.statusCode
+            
+            // Handle different status codes
+            switch statusCode {
+                case 200...299:
+                    do {
+                        let decoder = JSONDecoder()
+                        let decodedObject:T = try decoder.decode(T.self, from: data)
+                        onSuccess(decodedObject)
+                    } catch let decodingError {
+                        print("===========================================================")
+                        print(decodingError)
+                        print("===========================================================")
+                        onError(ErrorModel(statusCode: statusCode, errorType:FailureType.ParseError))
+                    }
+                    break
+                case 400...499:
+                    print("Client error with status code: \(statusCode)")
+                    onError(ErrorModel(statusCode:statusCode))
+                    return
+                case 500...599:
+                    print("Server error with status code: \(statusCode)")
+                    onError(ErrorModel(statusCode: statusCode, errorType:FailureType.ServerUnreachable))
+                    return
+                default:
+                    print("Unexpected status code: \(statusCode)")
+                    onError(ErrorModel(statusCode: statusCode, errorType:FailureType.Generic))
+                    return
+            }
+            
+//            // Ensure data is not nil
+//            guard let data = data else {
+//                onError("No data received")
+//                return
+//            }
+
+                
             print("===========================================================")
             print("Received JSON data:", String(data: data, encoding: .utf8) ?? "Invalid UTF-8 data")
             print("===========================================================")
             
             
-            do {
-                let decoder = JSONDecoder()
-                let decodedObject:T = try decoder.decode(T.self, from: data)
-                onSuccess(decodedObject)
-            } catch let decodingError {
-                print("===========================================================")
-                print(decodingError)
-                print("===========================================================")
-                onError("Failed to decode response")
-            }
+          
         }
         task.resume()
     }
