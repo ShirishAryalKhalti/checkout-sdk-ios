@@ -8,10 +8,11 @@
 import Foundation
 
 enum FailureType{
-    case ServerUnreachable,Httpcall,Generic,ParseError
+    case ServerUnreachable,Httpcall,Generic,ParseError,PaymentFailure,noNetwork
 }
 
 struct ErrorModel{
     var statusCode:Int?
     var errorType:FailureType?
+    var errorMessage:String?
 }
