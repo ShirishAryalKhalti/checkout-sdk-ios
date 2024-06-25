@@ -28,29 +28,35 @@ class KhaltiPaymentViewDataModel{
         switch self.errorModel?.errorType {
             case .ServerUnreachable:
                 self.messagEvent = OnMessageEvent.NetworkFailure
-                self.needsPaymentConfirmation = true
+                self.needsPaymentConfirmation = isPayment
             case .Httpcall:
-                self.messagEvent
+                self.messagEvent = getEvent()
+                
             case .Generic:
-                <#code#>
+                self.messagEvent = OnMessageEvent.Unknown
+                self.needsPaymentConfirmation = isPayment
+            
             case .ParseError:
-                self.messagEvent = (isPayment ?? false) ? OnMessageEvent.PaymentLookUpFailure : OnMessageEvent.ReturnUrlLoadFailure
-
+                self.messagEvent = getEvent()
+                self.needsPaymentConfirmation = isPayment
+            case .PaymentFailure:
+                self.messagEvent = OnMessageEvent.PaymentLookUpFailure
+            case .noNetwork:
+                self.messagEvent = OnMessageEvent.NetworkFailure
+                self.needsPaymentConfirmation = true
             case nil:
-                OnMessageEvent.Unknown
+                self.messagEvent =  OnMessageEvent.Unknown
+           
         }
     }
     
-    private func setMessageEvent(){
-        
-    }
-    
+
     private func getEvent () -> OnMessageEvent{
-        return (isPayment) ? OnMessageEvent.PaymentLookUpFailure : OnMessageEvent.ReturnUrlLoadFailure
+        return isPayment ? OnMessageEvent.PaymentLookUpFailure : OnMessageEvent.ReturnUrlLoadFailure
     }
     
-    private func returnOnMessagePayload() -> OnMessagePayload{
-        
+    func returnOnMessagePayload() -> OnMessagePayload{
+      return OnMessagePayload(event: self.messagEvent, message: self.message, code: self.statusCode, needsPaymentConfirmation: self.needsPaymentConfirmation)
     }
     
 }
