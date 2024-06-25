@@ -44,7 +44,6 @@
 		36C02EC8E1C1C4308D1A4EE313746405 /* QCKDSL.h in Headers */ = {isa = PBXBuildFile; fileRef = 0533BA6060A6659B1A5405E417AD4BC1 /* QCKDSL.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		37D89B2FC08E66308524D1F456C64752 /* PaymentLoadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7ABD84D3A97122E3DABF318DFB89C1 /* PaymentLoadModel.swift */; };
 		3A7BAC3525A87710E8B88E2343A87C2A /* ExampleGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E4265253F0C2E2E88973422E9522FD /* ExampleGroup.swift */; };
-		3A7D750A02A4026AC8731F09BE167D7A /* OnMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3421C343C8CA31C37687308FAB640B13 /* OnMessage.swift */; };
 		3ABDA920FDD838A534E55347FF35ACCC /* BeNil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C617157C2C0336E572A451EBC25B2834 /* BeNil.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		3B5E796F1BFBB87AAB31305D6FCE160E /* Nimble-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDED8F7CBF7574F0D736E5D35CA1888 /* Nimble-dummy.m */; };
 		3CFE6D672FEFBE8A9D10D5723FB88BF2 /* Stringers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F36AC8880EC306EFF42DCDFD7291E2A /* Stringers.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
@@ -222,7 +221,6 @@
 		2F36AC8880EC306EFF42DCDFD7291E2A /* Stringers.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Stringers.swift; path = Sources/Nimble/Utils/Stringers.swift; sourceTree = "<group>"; };
 		31CED2F21E8FD15BE989E30EDF39A179 /* QuickConfiguration.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QuickConfiguration.h; path = Sources/QuickObjectiveC/Configuration/QuickConfiguration.h; sourceTree = "<group>"; };
 		32703454A100A1EA3108CE43E8D5F606 /* NMBStringify.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NMBStringify.h; path = Sources/NimbleObjectiveC/NMBStringify.h; sourceTree = "<group>"; };
-		3421C343C8CA31C37687308FAB640B13 /* OnMessage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OnMessage.swift; sourceTree = "<group>"; };
 		359E7C21BBBD97FDD8EF230E728EBC17 /* Quick.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Quick.h; path = Sources/QuickObjectiveC/Quick.h; sourceTree = "<group>"; };
 		3756750B9AD0146AE7AB1637B7A04F6A /* QuickSpecBase.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QuickSpecBase.h; path = Sources/QuickObjCRuntime/include/QuickSpecBase.h; sourceTree = "<group>"; };
 		3C3FC781CE57870A9FB814F3A2EA0974 /* Url.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Url.swift; sourceTree = "<group>"; };
@@ -567,7 +565,6 @@
 				09D1320396BA2A1B7DEBDD21171DCD29 /* AnyCodable.swift */,
 				C46BDDC397D344CC54BC7D2866B57CD1 /* Environment.swift */,
 				DB6DB557D51B602B8A27FC0E38AEF000 /* KhaltiPayConfig.swift */,
-				3421C343C8CA31C37687308FAB640B13 /* OnMessage.swift */,
 				2BA67B27414648724145E9E1EE2FE488 /* PaymentDetailModel.swift */,
 				9F7ABD84D3A97122E3DABF318DFB89C1 /* PaymentLoadModel.swift */,
 				D42F6F72BC255F6F930518FF2931963E /* PaymentResult.swift */,
@@ -1118,7 +1115,6 @@
 				A93352DBED784A7D6D41466A47E8EED9 /* KhaltiPayConfig.swift in Sources */,
 				325F5AEAF1E0FE552B5D60232D731CD1 /* KhaltiPaymentViewController.swift in Sources */,
 				04B9296E2C25A10A0018F251 /* KhaltiPaymentViewDataModel.swift in Sources */,
-				3A7D750A02A4026AC8731F09BE167D7A /* OnMessage.swift in Sources */,
 				457A795E5C9E262AA215E44EF3EDAEE2 /* OnMessageEvent.swift in Sources */,
 				047E49A52C25465F0016E55B /* KhaltiApi.swift in Sources */,
 				112447D7182308130DCD4DBC4E6B5F96 /* OnMessagePayload.swift in Sources */,
