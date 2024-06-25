@@ -131,7 +131,7 @@ class KhaltiPaymentViewController: UIViewController {
     
     
     func createPaymentWebView(){
-
+        
         wkWebView.frame = view.bounds
         wkWebView.center = view.center
         wkWebView.isOpaque = false
@@ -143,26 +143,26 @@ class KhaltiPaymentViewController: UIViewController {
         
         wkWebView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(wkWebView)
-       
+        
         wkWebView.navigationDelegate = self
         
-            NSLayoutConstraint.activate([
-                wkWebView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 44),
-                wkWebView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-                wkWebView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                wkWebView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-            ])
+        NSLayoutConstraint.activate([
+            wkWebView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 44),
+            wkWebView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            wkWebView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            wkWebView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
         
-          
+        
         
     }
     
     private func loadUrl(){
         if let url = getPaymentUrl(){
-//        request = URLRequest(url: url)
+            //        request = URLRequest(url: url)
             request = URLRequest(url:url)
             self.startLoadingView()
-
+            
             loadRequest()
             
         }
@@ -181,7 +181,7 @@ class KhaltiPaymentViewController: UIViewController {
         let navigationItem = UINavigationItem(title: "Payment Gateway")
         
         navigationBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-            
+        
         
         if #available(iOS 13.0, *) {
             let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(backButtonTapped))
@@ -208,7 +208,7 @@ class KhaltiPaymentViewController: UIViewController {
     private  func startLoadingView(){
         self.loadingView.startLoading()
     }
-
+    
 }
 
 
@@ -219,12 +219,12 @@ extension KhaltiPaymentViewController :WKNavigationDelegate, WKUIDelegate{
     // WKNavigationDelegate methods to handle errors
     
     func webView(_ webView:WKWebView, didFailProvisionalNavigation: WKNavigation!, withError error: any Error){
-       
+        
         self.stopLoadingView()
         self.khalti?.onMessage(OnMessagePayload(event: OnMessageEvent.ReturnUrlLoadFailure, message:error.localizedDescription,code: nil, needsPaymentConfirmation: true),self.khalti)
     }
     
-
+    
     func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
         self.stopLoadingView()
         if let httpResponse = navigationResponse.response as? HTTPURLResponse {
@@ -244,30 +244,30 @@ extension KhaltiPaymentViewController:KhaltiPaymentViewControllerProtocol{
     func fetchPaymentDetail(){
         self.startLoadingView()
         
-            self.viewModel?.getPaymentDetail(onCompletion: { [weak self ] response in
-                self?.returnUrl = response.returnUrl
-                DispatchQueue.main.async {
-                    self?.stopLoadingView()
-
-                    self?.loadUrl()
-                    
-                }
+        self.viewModel?.getPaymentDetail(onCompletion: { [weak self ] response in
+            self?.returnUrl = response.returnUrl
+            DispatchQueue.main.async {
+                self?.stopLoadingView()
                 
-            }, onError: {[weak self] msg in
-                
-                DispatchQueue.main.async{
-                    self?.stopLoadingView()
-                    self?.showCustomDialog(message: msg,onTapped: {
-                        self?.fetchPaymentDetail()
-                        self?.dialogView.removeFromSuperview()
-                    }
-                    )
-                }
+                self?.loadUrl()
                 
             }
-            )
+            
+        }, onError: {[weak self] msg in
+            
+            DispatchQueue.main.async{
+                self?.stopLoadingView()
+                self?.showCustomDialog(message: msg,onTapped: {
+                    self?.fetchPaymentDetail()
+                    self?.dialogView.removeFromSuperview()
+                }
+                )
+            }
+            
+        }
+        )
         
-      
+        
     }
     
     func verifyPaymentStatus() {
@@ -276,14 +276,14 @@ extension KhaltiPaymentViewController:KhaltiPaymentViewControllerProtocol{
             DispatchQueue.main.async {
                 self?.stopLoadingView()
                 self?.khalti?.onPaymentResult(PaymentResult(status: response.status, payload: response), self?.khalti!)
-
+                
             }
             
-        }, onError: {[weak self] msg in
-          
-           print("error called")
+        }, onError: { msg in
+            
+            
         }
         )
-        print("not called")
+        
     }
 }
