@@ -31,6 +31,8 @@ class KhaltiPaymentViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let monitor = NetworkMonitor.shared
+        monitor.startMonitoring()
         viewModel = KhaltiPaymentControllerViewModel(khalti:khalti)
         self.view.backgroundColor = .white
         addNavigationBar()
@@ -44,7 +46,7 @@ class KhaltiPaymentViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    
+
     private func setupLoadingView() {
         view.addSubview(loadingView)
         loadingView.translatesAutoresizingMaskIntoConstraints = false
@@ -92,6 +94,7 @@ class KhaltiPaymentViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: .notificationAction, object: nil)
         
         NotificationCenter.default.removeObserver(self, name: .notificationType, object: nil)
+        NetworkMonitor.shared.removeMonitoring()
     }
     
     @objc func backButtonTapped() {
@@ -230,6 +233,7 @@ extension KhaltiPaymentViewController :WKNavigationDelegate, WKUIDelegate{
         if let httpResponse = navigationResponse.response as? HTTPURLResponse {
             
             if let returnUrl ,(httpResponse.url?.description ?? "") .contains(returnUrl) {
+                self.khalti?.onReturn(khalti)
                 self.verifyPaymentStatus()
                 
             }
