@@ -23,7 +23,15 @@ class NetworkMonitor {
                 path.usesInterfaceType($0.type)
             }.first?.type
         }
+        
+    }
+    
+    func startMonitoring(){
         monitor.start(queue: queue)
+    }
+    
+    func removeMonitoring(){
+        monitor.cancel()
     }
 }
 
