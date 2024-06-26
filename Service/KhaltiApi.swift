@@ -38,9 +38,9 @@ class KhaltiAPIService {
         return request
     }
     
-    func fetchDetail(url:String,params:[String:String],onCompletion: @escaping ((PaymentDetailModel)->()), onError: @escaping ((ErrorModel)->())) {
+    func fetchDetail(urlInString:String,params:[String:String],onCompletion: @escaping ((PaymentDetailModel)->()), onError: @escaping ((ErrorModel)->())) {
         
-        guard let url = URL(string:url) else {
+        guard let url = URL(string:urlInString) else {
             onError(ErrorModel(errorType:FailureType.Httpcall))
             return
         }
@@ -103,7 +103,7 @@ extension KhaltiAPIService:KhaltiApiServiceProtocol{
             }
             
             let task = URLSession.shared.dataTask(with: request) { data, response, error in
-                
+
                 
                 guard let data = data else {
                     onError(ErrorModel(errorType:FailureType.Generic))
