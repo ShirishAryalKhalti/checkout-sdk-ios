@@ -25,7 +25,7 @@ class KhaltiPaymentControllerViewModel {
         if let pIdx = khalti?.config.pIdx {
             var params = [String:String]()
             params["pidx"] = pIdx
-            service.fetchDetail(url:url,params: params, onCompletion: {(response) in
+            service.fetchDetail(urlInString:url,params: params, onCompletion: {(response) in
                 onCompletion(response)
                 
             }, onError: {(error) in
