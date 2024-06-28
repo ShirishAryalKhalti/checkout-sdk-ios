@@ -1,15 +1,18 @@
 PODS:
+  - IQKeyboardManagerSwift (6.5.16)
   - KhaltiCheckout (0.1.0)
   - Nimble (10.0.0)
   - Quick (2.2.1)
 
 DEPENDENCIES:
+  - IQKeyboardManagerSwift
   - KhaltiCheckout (from `../`)
   - Nimble
   - Quick
 
 SPEC REPOS:
   trunk:
+    - IQKeyboardManagerSwift
     - Nimble
     - Quick
 
@@ -18,10 +21,11 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
+  IQKeyboardManagerSwift: 12d89768845bb77b55cc092ecc2b1f9370f06b76
   KhaltiCheckout: 5a85481567580d724ff4d3b3551df84d19f0e178
   Nimble: 5316ef81a170ce87baf72dd961f22f89a602ff84
   Quick: f5754d69b7013f5864c29aab9ae6f0c79c5bc200
 
-PODFILE CHECKSUM: 0a3103fb20c139b45c69998760d221b2ee03adee
+PODFILE CHECKSUM: b5b3ea121f884aac1392abca98506acc239bcf9f
 
 COCOAPODS: 1.15.2
