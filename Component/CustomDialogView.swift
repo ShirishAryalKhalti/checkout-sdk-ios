@@ -22,7 +22,7 @@ class CustomDialogView: UIView {
     private let actionButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("OK", for: .normal)
-        button.backgroundColor = .systemBlue
+        button.backgroundColor = .blue.withAlphaComponent(0.1)
         button.setTitleColor(.black, for: .normal)
         button.layer.cornerRadius = 5
         button.translatesAutoresizingMaskIntoConstraints = false
