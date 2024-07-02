@@ -30,11 +30,12 @@ class KhaltiAPIService {
         request.httpBody = createHttpBody(body: body)
         request.httpMethod = "POST"
         request.setValue(Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String, forHTTPHeaderField: "checkout-version")
-        request.setValue("iOS", forHTTPHeaderField: "checkout-source")
+        request.setValue("iOS", forHTTPHeaderField: "checkout-platform")
         request.setValue(UIDevice.current.model, forHTTPHeaderField: "checkout-device-model")
-        request.setValue(UIDevice.current.identifierForVendor?.uuidString ?? "", forHTTPHeaderField: "checkout-device-id")
-        request.setValue(UIDevice.current.systemVersion, forHTTPHeaderField: "checkout-ios-version")
+        request.setValue(UIDevice.current.identifierForVendor?.uuidString ?? "", forHTTPHeaderField: "merchant-package-name")
+        request.setValue(UIDevice.current.systemVersion, forHTTPHeaderField: "checkout-os-version")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
         return request
     }
     
@@ -96,71 +97,84 @@ extension KhaltiAPIService:KhaltiApiServiceProtocol{
                     print(bodyString)
                     print("===========================================================")
                 } else {
-                    print("Request httpBody is not a valid UTF-8 string.")
+                    print("Request does not contain a httpBody.")
                 }
-            } else {
-                print("Request does not contain a httpBody.")
-            }
-            
-            let task = URLSession.shared.dataTask(with: request) { data, response, error in
-
                 
-                guard let data = data else {
-                    onError(ErrorModel(errorType:FailureType.Generic))
+                let task = URLSession.shared.dataTask(with: request) { data, response, error in
                     
-                    return
-                }
-                
-                // Ensure response is an HTTPURLResponse and check the status code
-                guard let httpResponse = response as? HTTPURLResponse else {
-                    onError(ErrorModel(errorType:FailureType.Httpcall))
-                    return
-                }
-                
-                let statusCode = httpResponse.statusCode
-                
-                // Handle different status codes
-                switch statusCode {
-                    case 200...299:
-                        do {
-                            let decoder = JSONDecoder()
-                            let decodedObject:T = try decoder.decode(T.self, from: data)
-                            onSuccess(decodedObject)
-                        } catch let decodingError {
-                            print("===========================================================")
-                            print(decodingError)
-                            print("===========================================================")
-                            onError(ErrorModel(statusCode: statusCode, errorType:FailureType.ParseError))
-                        }
-                        break
-                    case 400...499:
-                        if let error = error {
-                            print("Client error with status code: \(statusCode)")
-                            onError(ErrorModel(statusCode:statusCode,errorType:FailureType.Httpcall,errorMessage:error.localizedDescription))
+                    
+                    guard let data = data else {
+                        onError(ErrorModel(errorType:FailureType.Generic))
+                        
+                        return
+                    }
+                    
+                    // Ensure response is an HTTPURLResponse and check the status code
+                    guard let httpResponse = response as? HTTPURLResponse else {
+                        onError(ErrorModel(errorType:FailureType.Httpcall))
+                        return
+                    }
+                    
+                    let statusCode = httpResponse.statusCode
+                    print(statusCode)
+                    
+                    // Handle different status codes
+                    switch statusCode {
+                        case 200...299:
+                            do {
+                                let decoder = JSONDecoder()
+                                let decodedObject:T = try decoder.decode(T.self, from: data)
+                                onSuccess(decodedObject)
+                            } catch let decodingError {
+                                print("===========================================================")
+                                print(decodingError)
+                                print("===========================================================")
+                                onError(ErrorModel(statusCode: statusCode, errorType:FailureType.ParseError))
+                            }
+                            //                        return
+                            break
+                        case 400...499:
+                            guard let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) else {
+                                onError(ErrorModel(statusCode:statusCode,errorType:FailureType.Httpcall))
+                                
+                                return
+                            }
+                            if let dict = json as? [String:Any] {
+                                onError(ErrorModel(statusCode:statusCode,errorType:FailureType.Httpcall,errorMessage:dict["detail"] as? String ?? "Not Found"))
+                            }
+                            if let error = error {
+                                print("Client error with status code: \(statusCode)")
+                                onError(ErrorModel(statusCode:statusCode,errorType:FailureType.Httpcall,errorMessage:error.localizedDescription))
+                                return
+                            }
+                            
+                            
+                        case 500...599:
+                            print("Server error with status code: \(statusCode)")
+                            onError(ErrorModel(statusCode: statusCode, errorType:FailureType.ServerUnreachable))
                             return
-                        }
-                        
-                        
-                    case 500...599:
-                        print("Server error with status code: \(statusCode)")
-                        onError(ErrorModel(statusCode: statusCode, errorType:FailureType.ServerUnreachable))
-                        return
-                    default:
-                        print("Unexpected status code: \(statusCode)")
-                        onError(ErrorModel(statusCode: statusCode, errorType:FailureType.Generic))
-                        return
+                        default:
+                            print("Unexpected status code: \(statusCode)")
+                            onError(ErrorModel(statusCode: statusCode, errorType:FailureType.Generic))
+                            return
+                    }
+                    
+                    let errorMessage = String(data:data,encoding: .utf8)
+                    print("===========================================================")
+                    print("Received JSON data:", String(data: data, encoding: .utf8) ?? "Invalid UTF-8 data")
+                    print("===========================================================")
+                    
+                    //                onError(ErrorModel(statusCode: statusCode, errorType:FailureType.Generic,errorMessage: errorMessage))
+                    
                 }
-                
-                print("===========================================================")
-                print("Received JSON data:", String(data: data, encoding: .utf8) ?? "Invalid UTF-8 data")
-                print("===========================================================")
-                
+                task.resume()
             }
-            task.resume()
-        }else{
+        }
+        else{
             onError(ErrorModel(errorType:FailureType.noNetwork,errorMessage:"No Internet Connection"))
         }
- 
+       
+        
     }
     
     
