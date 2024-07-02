@@ -31,8 +31,12 @@ class KhaltiPaymentViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("viewdidload")
         let monitor = NetworkMonitor.shared
+        
         monitor.startMonitoring()
+    
+        print(monitor.isConnected)
         viewModel = KhaltiPaymentControllerViewModel(khalti:khalti)
         self.view.backgroundColor = .white
         addNavigationBar()
@@ -68,6 +72,7 @@ class KhaltiPaymentViewController: UIViewController {
             self.dismiss(animated: true)
         }
     }
+
     
     private func showCustomDialog(message:String,onTapped:@escaping () -> Void){
         dialogView.translatesAutoresizingMaskIntoConstraints = false
@@ -81,7 +86,6 @@ class KhaltiPaymentViewController: UIViewController {
         ])
         
         dialogView.configure(message: message, buttonTitle: "OK") {
-            print("Button tapped")
             onTapped()
             // Dismiss the dialog
             
@@ -94,7 +98,7 @@ class KhaltiPaymentViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: .notificationAction, object: nil)
         
         NotificationCenter.default.removeObserver(self, name: .notificationType, object: nil)
-        NetworkMonitor.shared.removeMonitoring()
+//        NetworkMonitor.shared.removeMonitoring()
     }
     
     @objc func backButtonTapped() {
@@ -164,7 +168,6 @@ class KhaltiPaymentViewController: UIViewController {
         if let url = getPaymentUrl(){
             //        request = URLRequest(url: url)
             request = URLRequest(url:url)
-            self.startLoadingView()
             
             loadRequest()
             
@@ -251,7 +254,6 @@ extension KhaltiPaymentViewController:KhaltiPaymentViewControllerProtocol{
         self.viewModel?.getPaymentDetail(onCompletion: { [weak self ] response in
             self?.returnUrl = response.returnUrl
             DispatchQueue.main.async {
-                self?.stopLoadingView()
                 
                 self?.loadUrl()
                 
@@ -262,7 +264,6 @@ extension KhaltiPaymentViewController:KhaltiPaymentViewControllerProtocol{
             DispatchQueue.main.async{
                 self?.stopLoadingView()
                 self?.showCustomDialog(message: msg,onTapped: {
-                    self?.fetchPaymentDetail()
                     self?.dialogView.removeFromSuperview()
                 }
                 )
