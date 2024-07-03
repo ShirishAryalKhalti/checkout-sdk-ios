@@ -23,12 +23,13 @@ class KhaltiAPIService {
     }
     
     
-    private func createRequest(for url:URL,body:[String:String]) -> URLRequest {
+    private func createRequest(for url:URL,body:[String:String],publicKey:String) -> URLRequest {
         
         var request = URLRequest(url: url)
         
         request.httpBody = createHttpBody(body: body)
         request.httpMethod = "POST"
+        request.setValue("Key \(publicKey)", forHTTPHeaderField: "Authorization")
         request.setValue(Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String, forHTTPHeaderField: "checkout-version")
         request.setValue("iOS", forHTTPHeaderField: "checkout-platform")
         request.setValue(UIDevice.current.model, forHTTPHeaderField: "checkout-device-model")
@@ -39,14 +40,14 @@ class KhaltiAPIService {
         return request
     }
     
-    func fetchDetail(urlInString:String,params:[String:String],onCompletion: @escaping ((PaymentDetailModel)->()), onError: @escaping ((ErrorModel)->())) {
+    func fetchDetail(urlInString:String,params:[String:String],publicKey:String,onCompletion: @escaping ((PaymentDetailModel)->()), onError: @escaping ((ErrorModel)->())) {
         
         guard let url = URL(string:urlInString) else {
             onError(ErrorModel(errorType:FailureType.Httpcall))
             return
         }
         
-        let request = self.createRequest(for: url,body: params)
+        let request = self.createRequest(for: url,body: params,publicKey: publicKey)
         self.handleRequest(request: request, onSuccess: {(model:PaymentDetailModel)in
             onCompletion(model)
         }, onError: {(error) in
@@ -56,7 +57,7 @@ class KhaltiAPIService {
     }
     
     
-    func fetchPaymentStatus(url:String,params:[String:String],onCompletion: @escaping ((PaymentLoadModel)->()), onError: @escaping ((ErrorModel)->())) {
+    func fetchPaymentStatus(url:String,params:[String:String],publicKey:String,onCompletion: @escaping ((PaymentLoadModel)->()), onError: @escaping ((ErrorModel)->())) {
         
         guard let url = URL(string: url) else {
             
@@ -64,7 +65,7 @@ class KhaltiAPIService {
         }
         
         
-        let request = self.createRequest(for: url,body: params)
+        let request = self.createRequest(for: url,body: params,publicKey:publicKey)
         
         self.handleRequest(request: request, onSuccess: {(model:PaymentLoadModel)in
             onCompletion(model)
