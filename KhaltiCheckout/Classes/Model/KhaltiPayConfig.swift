@@ -37,6 +37,7 @@ public class KhaltiPayConfig: NSObject {
     func getPidx() -> String {
         return self.pIdx
     }
+    
     func getPublicKey() -> String {
         return self.publicKey
     }

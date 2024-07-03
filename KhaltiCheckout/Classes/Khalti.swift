@@ -53,6 +53,7 @@ public class Khalti{
     }
     
     @objc public func close(){
+        
         NotificationCenter.default.post(name: .notificationAction, object: nil)
         
     }
