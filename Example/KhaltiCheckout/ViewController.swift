@@ -15,20 +15,28 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         
-        khalti = Khalti.init(config: KhaltiPayConfig(publicKey:"live_public_key_979320ffda734d8e9f7758ac39ec775f", pIdx:"dh5bBcwa4q4PGrfVStxFdG",environment:Environment.TEST), onPaymentResult: {(paymentResult,khalti) in
+        khalti = Khalti.init(config: KhaltiPayConfig(publicKey:"4aa1b684f4de4860968552558fc8487d", pIdx:"tehsEsSbeEeLD5ECPrWDk2",environment:Environment.TEST), onPaymentResult: {(paymentResult,khalti) in
+            //    Payment successful for pidx: ${khalti.config.pidx}"
             khalti?.close()
-            //            khalti?.close()
+            
             
             
         }, onMessage: {(onMessageResult,khalti) in
+            
+            //Handle onMessage callback here
+            //if needsPaymentConfiramtion true then verify payment status
+            
             let shouldVerify = onMessageResult.needsPaymentConfirmation
+        
             if shouldVerify {
                 khalti?.verify()
+            }else{
+                khalti?.close()
             }
             
             
         }, onReturn: {(khalti) in
-            
+            // called when payment is success
         })
         setUpView()
     }
@@ -73,18 +81,58 @@ class ViewController: UIViewController {
         }
         containerView.addSubview(pIdxTextView)
         
-//        // CustomRadioButton
-//        let customRadioButton = CustomRadioButton(selectedEnvironment: "test")
-//        customRadioButton.translatesAutoresizingMaskIntoConstraints = false
-//        containerView.addSubview(customRadioButton)
+        let segmentTitleLabel = UILabel()
+        segmentTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        segmentTitleLabel.text = "Environment"
+        segmentTitleLabel.textColor = .black
+        containerView.addSubview(segmentTitleLabel)
+
+    
+        
+        // CustomRadioButton
+        let customRadioButton = CustomRadioButton(selectedEnvironment: self.khalti?.config.environment ?? Environment.TEST)
+        customRadioButton.translatesAutoresizingMaskIntoConstraints = false
+        customRadioButton.backgroundColor = .white
+        customRadioButton.onSelected = { [weak self] env in
+            self?.khalti?.config.environment = env
+            
+        }
+        containerView.addSubview(customRadioButton)
+//        
+        let feeLabel = UILabel()
+        feeLabel.font = .systemFont(ofSize: 22)
+        feeLabel.text = "Rs. 22"
+        feeLabel.translatesAutoresizingMaskIntoConstraints = false
+        feeLabel.textColor = .black.withAlphaComponent(0.8)
+        
+        containerView.addSubview(feeLabel)
+        
+        let dayLabel = UILabel()
+        dayLabel.text = "1 day Fee"
+        dayLabel.font = .systemFont(ofSize: 12)
+        
+        dayLabel.translatesAutoresizingMaskIntoConstraints = false
+        dayLabel.textColor = .black.withAlphaComponent(0.8)
+        
+        containerView.addSubview(dayLabel)
+        
+        let merchantLabel = UILabel()
+        merchantLabel.text = "This is a demo application developed by some merchant"
+        merchantLabel.font = .systemFont(ofSize: 12)
+        
+        merchantLabel.translatesAutoresizingMaskIntoConstraints = false
+        merchantLabel.textColor = .black.withAlphaComponent(0.8)
+        
+        containerView.addSubview(merchantLabel)
         
         // Button
         let button = UIButton(type: .system)
-        button.setTitle("Pay RS. 22", for: .normal)
+        button.setTitle("Pay Rs. 22", for: .normal)
         button.backgroundColor = .blue.withAlphaComponent(0.1)
         button.setTitleColor(.black, for: .normal)
         button.layer.cornerRadius = 25 // Adjust the corner radius as needed
         button.clipsToBounds = true
+        button.titleLabel?.font = .boldSystemFont(ofSize: 14)
         
         button.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(button)
@@ -106,7 +154,7 @@ class ViewController: UIViewController {
         
         // Constraints for ImageView
         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 90),
+            imageView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 70),
             imageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
             imageView.heightAnchor.constraint(equalToConstant: 200),
@@ -127,22 +175,53 @@ class ViewController: UIViewController {
             pIdxTextView.topAnchor.constraint(equalTo: publicKeyTextView.bottomAnchor, constant: 20),
             pIdxTextView.heightAnchor.constraint(equalToConstant: 70),
         ])
+               
+        NSLayoutConstraint.activate([
+            segmentTitleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
+            segmentTitleLabel.topAnchor.constraint(equalTo: pIdxTextView.bottomAnchor, constant: 30),
+        ])
         
-//        // Constraints for CustomRadioButton
-//        NSLayoutConstraint.activate([
-//            customRadioButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
-//            customRadioButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
-//            customRadioButton.topAnchor.constraint(equalTo: pIdxTextView.bottomAnchor, constant: 20),
-//            customRadioButton.heightAnchor.constraint(equalToConstant: 100),
-//        ])
-//        
+        
+        // Constraints for CustomRadioButton
+        NSLayoutConstraint.activate([
+            customRadioButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
+            customRadioButton.topAnchor.constraint(equalTo: segmentTitleLabel.bottomAnchor, constant: 15),
+            customRadioButton.widthAnchor.constraint(equalToConstant: 110),
+        ])
+        
+        
+        // Constraints for feeLabel
+        NSLayoutConstraint.activate([
+            feeLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            feeLabel.topAnchor.constraint(equalTo: customRadioButton.bottomAnchor, constant: 40),
+            
+        ])
+        
+        // Constraints for dayLabel
+        NSLayoutConstraint.activate([
+            dayLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+
+            dayLabel.topAnchor.constraint(equalTo: feeLabel.bottomAnchor, constant: 15),
+            
+        ])
+        
+        
         // Constraints for Button
         NSLayoutConstraint.activate([
             button.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            button.topAnchor.constraint(equalTo: pIdxTextView.bottomAnchor, constant: 90),
-            button.widthAnchor.constraint(equalToConstant: 200),
-            button.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -50),
+            button.topAnchor.constraint(equalTo: dayLabel.bottomAnchor, constant: 20),
+            button.widthAnchor.constraint(equalToConstant: 150),
+//            button.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -150),
             button.heightAnchor.constraint(equalToConstant: 50),
+        ])
+        
+        // Constraints for merchantLabel
+        NSLayoutConstraint.activate([
+            merchantLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            merchantLabel.topAnchor.constraint(equalTo: button.bottomAnchor, constant: 40),
+//            merchantLabel.widthAnchor.constraint(equalToConstant: 150),
+            merchantLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -150),
+//            merchantLabel.heightAnchor.constraint(equalToConstant: 50),
         ])
     }
 
@@ -231,36 +310,21 @@ class CustomTextFieldView: UIView,UITextFieldDelegate {
 }
 
 
+
+
 class CustomRadioButton: UIView {
     
-    var onSelected: ((String) -> Void)?
-    var selectedEnvironment: String = "" // Initialize with an empty string or any default value
+    var onSelected: ((Environment) -> Void)?
+    var selectedEnvironment: Environment = Environment.TEST // Initialize with an empty string or any default value
     
     // Radio Button 1
     lazy var prodButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("PROD", for: .normal)
+        button.setTitle("  PROD  ", for: .normal)
         button.setTitleColor(.black, for: .normal)
-        
-        
-        button.tintColor = .white
-        
-        
-        
-        
-        if #available(iOS 13.0, *) {
-            button.setImage(UIImage(systemName: "circle"), for: .normal)
-            button.setImage(UIImage(systemName: "circle.fill"), for: .selected)
-            
-            
-            
-        } else {
-            button.setImage(UIImage(named: "circle"), for: .normal)
-            button.setImage(UIImage(named: "circle_filled"), for: .selected)
-            
-            
-        }
+        button.layer.cornerRadius = 5
+    
         button.addTarget(self, action: #selector(radioButtonTapped(_:)), for: .touchUpInside)
         return button
     }()
@@ -269,28 +333,19 @@ class CustomRadioButton: UIView {
     lazy var testButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("TEST", for: .normal)
-        button.tintColor = .clear
-        button.setTitleColor(.black, for: .selected)
+        button.setTitle("  TEST  ", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.layer.cornerRadius = 5
         
-        if #available(iOS 13.0, *) {
-            button.setImage(UIImage(systemName: "circle"), for: .normal)
-            button.setImage(UIImage(systemName: "circle.fill")?.withTintColor(.purple), for: .selected)
-            
-        } else {
-            button.setImage(UIImage(named: "circle"), for: .normal)
-            button.setImage(UIImage(named: "circle_filled"), for: .selected)
-            
-            
-        }
         button.addTarget(self, action: #selector(radioButtonTapped(_:)), for: .touchUpInside)
         return button
     }()
     
-    init(selectedEnvironment: String) {
+    init(selectedEnvironment: Environment) {
         self.selectedEnvironment = selectedEnvironment
         super.init(frame: .zero)
         setupUI()
+        radioButtonTapped(testButton)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -300,42 +355,54 @@ class CustomRadioButton: UIView {
     
     @objc private func radioButtonTapped(_ sender: UIButton) {
         if sender == prodButton {
-            prodButton.isSelected = true
-            testButton.isSelected = false
-            selectedEnvironment = "prod"
+
+            
+            prodButton.backgroundColor = .blue.withAlphaComponent(0.3)
+            prodButton.layer.cornerRadius = 5
+            
+            
+            testButton.backgroundColor = .blue.withAlphaComponent(0.1)
+testButton.layer.cornerRadius = 0
+            
+            selectedEnvironment = Environment.PROD
         } else if sender == testButton {
-            prodButton.isSelected = false
-            testButton.isSelected = true
-            selectedEnvironment = "test"
+                        
+            testButton.backgroundColor = .blue.withAlphaComponent(0.3)
+            testButton.layer.cornerRadius = 5
+            
+            
+            prodButton.backgroundColor = .blue.withAlphaComponent(0.1)
+            prodButton.layer.cornerRadius = 0
+            
+            selectedEnvironment = Environment.TEST
         }
         onSelected?(selectedEnvironment)
     }
     
     private func setupUI() {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Environment"
-        label.font = UIFont.systemFont(ofSize: 16)
-        label.textColor = UIColor.black
+ 
         
+        
+        self.layer.cornerRadius = 5
+        self.clipsToBounds = true
         addSubview(prodButton)
         addSubview(testButton)
-        addSubview(label)
         
         NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: leadingAnchor),
-            label.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            
-            
-            
-            // Constraints for prodButton
+    
             prodButton.leadingAnchor.constraint(equalTo: leadingAnchor),
-            prodButton.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 10),
+            
+            prodButton.topAnchor.constraint(equalTo: topAnchor, constant: 0),
+            prodButton.bottomAnchor.constraint(equalTo: bottomAnchor,constant: 0),
             
             // Constraints for testButton
-            testButton.leadingAnchor.constraint(equalTo: leadingAnchor),
-            testButton.topAnchor.constraint(equalTo: prodButton.bottomAnchor, constant: 10),
+            testButton.leadingAnchor.constraint(equalTo:prodButton.trailingAnchor,constant: 2),
+            testButton.topAnchor.constraint(equalTo: topAnchor, constant: 0),
+            testButton.bottomAnchor.constraint(equalTo: bottomAnchor,constant: 0),
+
         ])
+        
+        
     }
 }
 
