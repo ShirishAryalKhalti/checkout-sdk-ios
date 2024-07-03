@@ -68,7 +68,7 @@ class KhaltiPaymentViewController: UIViewController {
         if notification.name == Notification.Name.notificationType {
             self.verifyPaymentStatus()
         }else{
-            
+            khalti?.onMessage(OnMessagePayload(event: OnMessageEvent.KPGDisposed, message: "Khalti payment page disposed"),khalti)
             self.dismiss(animated: true)
         }
     }
@@ -284,8 +284,11 @@ extension KhaltiPaymentViewController:KhaltiPaymentViewControllerProtocol{
                 
             }
             
-        }, onError: { msg in
-            
+        }, onError: {[weak self] msg in
+            DispatchQueue.main.async {
+                self?.stopLoadingView()
+                
+            }
             
         }
         )
