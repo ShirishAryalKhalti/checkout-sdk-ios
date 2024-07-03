@@ -25,13 +25,14 @@ class KhaltiPaymentControllerViewModel {
         if let pIdx = khalti?.config.pIdx {
             var params = [String:String]()
             params["pidx"] = pIdx
-            service.fetchDetail(urlInString:url,params: params, onCompletion: {(response) in
+            service.fetchDetail(urlInString:url,params: params,publicKey: khalti?.config.publicKey ?? "", onCompletion: {(response) in
                 onCompletion(response)
                 
             }, onError: {(error) in
                 if error.errorType != FailureType.noNetwork{
-                    
                     onError(error.errorMessage ?? "There was an error setting up your payment. Please try again later.")
+                }else{
+                    onError(error.errorMessage ?? "No internet Connection")
                 }
             })
         }
@@ -46,9 +47,11 @@ class KhaltiPaymentControllerViewModel {
         if let pIdx = khalti?.config.pIdx {
             var params = [String:String]()
             params["pidx"] = pIdx
-            service.fetchPaymentStatus(url:url,params: params, onCompletion: {(response) in
+        
+            service.fetchPaymentStatus(url:url,params: params,publicKey: khalti?.config.publicKey ?? "", onCompletion: {(response) in
                 onCompletion(response)
             }, onError: {[weak self](error) in
+                onError("")
                 self?.handleError(error: error, isPayment: true)
                 
             })
