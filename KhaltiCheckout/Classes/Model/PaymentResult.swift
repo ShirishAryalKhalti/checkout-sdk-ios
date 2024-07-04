@@ -6,14 +6,15 @@
 //
 import Foundation
 
-  public class PaymentResult: NSObject {
-    private var status:String?
-    private var payload:PaymentLoadModel?
-      private var message:String?
+public class PaymentResult {
+    public var status:String?
+    public var payload:PaymentLoadModel?
+    public var message:String?
     
-     init(status:String?, message:String?=nil,payload:PaymentLoadModel?) {
+    init(status:String?, message:String?=nil,payload:PaymentLoadModel?) {
         self.status = status
         self.payload = payload
         
     }
+    
 }
