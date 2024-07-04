@@ -23,8 +23,6 @@ public class Khalti{
         self.onPaymentResult = onPaymentResult
         self.onMessage = onMessage
         self.onReturn = onReturn
-////        KhaltiGlobal.setKhalti(khalti: self)
-////        KhaltiGlobal.setKhaltiPayconfig(config: self.config)
     }
     
     
@@ -55,6 +53,7 @@ public class Khalti{
     }
     
     @objc public func close(){
+        
         NotificationCenter.default.post(name: .notificationAction, object: nil)
         
     }

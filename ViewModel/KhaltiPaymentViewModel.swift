@@ -11,7 +11,7 @@ class KhaltiPaymentControllerViewModel {
     var khalti:Khalti?
     
     let service = KhaltiAPIService()
-    let monitor = NetworkMonitor.shared
+    
     
     
     init(khalti:Khalti? = nil) {
@@ -21,56 +21,50 @@ class KhaltiPaymentControllerViewModel {
     func getPaymentDetail(onCompletion: @escaping ((PaymentDetailModel)->()), onError: @escaping ((String)->())){
         
         let baseUrl = getBaseUrl()
-        if isNetworkReachable(){
-            let url = baseUrl.appendUrl(url: Url.PAYMENT_DETAIL)
-            if let pIdx = khalti?.config.pIdx {
-                var params = [String:String]()
-                params["pidx"] = pIdx
-                service.fetchDetail(url:url,params: params, onCompletion: {[weak self](response) in
-                    onCompletion(response)
-                    
-                }, onError: {(error) in
-                    onError(error)
-                })
-            }
-            
-        }else{
-            handleNetworkConnectivityFailure()
+        let url = baseUrl.appendUrl(url: Url.PAYMENT_DETAIL)
+        if let pIdx = khalti?.config.pIdx {
+            var params = [String:String]()
+            params["pidx"] = pIdx
+            service.fetchDetail(urlInString:url,params: params,publicKey: khalti?.config.publicKey ?? "", onCompletion: {(response) in
+                onCompletion(response)
+                
+            }, onError: {(error) in
+                if error.errorType != FailureType.noNetwork{
+                    onError(error.errorMessage ?? "There was an error setting up your payment. Please try again later.")
+                }else{
+                    onError(error.errorMessage ?? "No internet Connection")
+                }
+            })
         }
+        
+        
         
     }
     
     func verifyPaymentStatus(onCompletion:@escaping((PaymentLoadModel)->()),onError: @escaping ((String)->())){
         let baseUrl = getBaseUrl()
-        if isNetworkReachable(){
-            let url = baseUrl.appendUrl(url: Url.LOOKUP_SDK)
-            if let pIdx = khalti?.config.pIdx {
-                var params = [String:String]()
-                params["pidx"] = pIdx
-                service.fetchPaymentStatus(url:url,params: params, onCompletion: {(response) in
-                    onCompletion(response)
-                }, onError: {(error) in
-                    onError(error)
-                    
-                })
+        let url = baseUrl.appendUrl(url: Url.LOOKUP_SDK)
+        if let pIdx = khalti?.config.pIdx {
+            var params = [String:String]()
+            params["pidx"] = pIdx
+        
+            service.fetchPaymentStatus(url:url,params: params,publicKey: khalti?.config.publicKey ?? "", onCompletion: {(response) in
+                onCompletion(response)
+            }, onError: {[weak self](error) in
+                onError("")
+                self?.handleError(error: error, isPayment: true)
                 
-            }
-        }else{
-            handleNetworkConnectivityFailure()
+            })
+            
         }
+    }
+    
+    private func handleError(error:ErrorModel,isPayment:Bool){
+        let viewModelData = KhaltiPaymentViewDataModel(errorModel:error,isPayment:isPayment )
+        khalti?.onMessage(viewModelData.returnOnMessagePayload(),khalti)
         
         
     }
-    
-    private func handleNetworkConnectivityFailure(){
-        khalti?.onMessage(OnMessagePayload(event: OnMessageEvent.NetworkFailure, message: "Network Failure"),khalti)
-    }
-    
-    private func isNetworkReachable() -> Bool{
-        let isConnected = monitor.isConnected
-        return isConnected
-    }
-    
     
     private func getBaseUrl() ->Url{
         let isProd = khalti?.config.isProd() ?? false

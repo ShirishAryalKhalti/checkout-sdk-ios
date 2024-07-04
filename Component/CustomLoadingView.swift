@@ -50,7 +50,7 @@ class CustomLoadingView: UIView {
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
-            activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -10),
+            activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor),
             
             loadingLabel.topAnchor.constraint(equalTo: activityIndicator.bottomAnchor, constant: 10),
             loadingLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),

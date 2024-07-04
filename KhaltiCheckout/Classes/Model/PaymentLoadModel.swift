@@ -7,16 +7,16 @@
 
 import Foundation
 
-struct PaymentLoadModel: Codable {
-    let pidx: String?
-    let totalAmount: Int64
-    let status: String?
-    let transactionId: String?
-    let fee: Int64
-    let refunded: Bool
-    let purchaseOrderId: String?
-    let purchaseOrderName: String?
-    let extraMerchantParams: [String: Any]?
+public struct PaymentLoadModel: Codable {
+   public  let pidx: String?
+    public let totalAmount: Int64
+    public  let status: String?
+    public  let transactionId: String?
+    public  let fee: Int64
+    public  let refunded: Bool
+    public  let purchaseOrderId: String?
+    public  let purchaseOrderName: String?
+    public  let extraMerchantParams: [String: Any]?
     
     enum CodingKeys: String, CodingKey {
         case pidx
@@ -31,7 +31,7 @@ struct PaymentLoadModel: Codable {
     }
     
     // Custom decoding to handle extraMerchantParams as [String: Any]
-    init(from decoder: Decoder) throws {
+   public  init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         pidx = try container.decodeIfPresent(String.self, forKey: .pidx)
         totalAmount = try container.decodeIfPresent(Int64.self, forKey: .totalAmount) ?? 0
@@ -51,7 +51,7 @@ struct PaymentLoadModel: Codable {
     }
     
     // Custom encoding to handle extraMerchantParams as [String: Any]
-    func encode(to encoder: Encoder) throws {
+   public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(pidx, forKey: .pidx)
         try container.encode(totalAmount, forKey: .totalAmount)
