@@ -11,7 +11,7 @@ public typealias OnMessageResult = (OnMessagePayload,Khalti?) -> ()
 public typealias OnReturn = (Khalti?) -> ()
 
 
-public class Khalti{
+public class Khalti:NSObject{
     public var config:KhaltiPayConfig
     public var onPaymentResult: OnPaymentResult
     public var onMessage: OnMessageResult
