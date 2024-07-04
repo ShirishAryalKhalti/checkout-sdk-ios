@@ -67,9 +67,6 @@ class KhaltiPaymentViewController: UIViewController {
     @objc func handleNotification(notification: Notification) {
         if notification.name == Notification.Name.notificationType {
             self.verifyPaymentStatus()
-        }else{
-            khalti?.onMessage(OnMessagePayload(event: OnMessageEvent.KPGDisposed, message: "Khalti payment page disposed"),khalti)
-            self.dismiss(animated: true)
         }
     }
 
@@ -102,7 +99,10 @@ class KhaltiPaymentViewController: UIViewController {
     }
     
     @objc func backButtonTapped() {
+       
         self.dismiss(animated: true)
+        khalti?.onMessage(OnMessagePayload(event: OnMessageEvent.KPGDisposed, message: "Khalti payment page disposed"),khalti)
+       
     }
     
     func getPaymentUrl() -> URL?{
