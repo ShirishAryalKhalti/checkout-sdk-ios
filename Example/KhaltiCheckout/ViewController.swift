@@ -15,16 +15,19 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         
-        khalti = Khalti.init(config: KhaltiPayConfig(publicKey:"4aa1b684f4de4860968552558fc8487d", pIdx:"tehsEsSbeEeLD5ECPrWDk2",environment:Environment.TEST), onPaymentResult: {(paymentResult,khalti) in
-            //    Payment successful for pidx: ${khalti.config.pidx}"
+        khalti = Khalti.init(config: KhaltiPayConfig(publicKey:"4aa1b684f4de4860968552558fc8487d", pIdx:"tehsEsSbeEeLD5ECPrWDk2",environment:Environment.TEST), onPaymentResult: {[weak self] (paymentResult,khalti) in
+            print("Demo | onPaymentResult", paymentResult)
             khalti?.close()
             
+            self?.showSuccessAlert(title: "Success", message: paymentResult.message ?? "Success")
             
             
-        }, onMessage: {(onMessageResult,khalti) in
+        }, onMessage: {[weak self](onMessageResult,khalti) in
             
             //Handle onMessage callback here
             //if needsPaymentConfiramtion true then verify payment status
+            
+            self?.showSuccessAlert(title: "", message: onMessageResult.message)
             
             let shouldVerify = onMessageResult.needsPaymentConfirmation
         
@@ -231,6 +234,14 @@ class ViewController: UIViewController {
         khalti?.open(viewController: self)
         
         
+    }
+    
+    @objc func showSuccessAlert(title:String,message:String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
     }
     
 }
