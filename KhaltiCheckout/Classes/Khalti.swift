@@ -44,8 +44,7 @@ public typealias OnReturn = (Khalti?) -> ()
     }
     
     @objc public func close(){
-        
-        NotificationCenter.default.post(name: .notificationAction, object: nil)
+         NotificationCenter.default.post(name: .notificationAction, object: nil)
         
     }
     
