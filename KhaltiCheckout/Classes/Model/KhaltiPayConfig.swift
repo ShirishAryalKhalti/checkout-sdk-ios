@@ -8,20 +8,20 @@
 import Foundation
 
 
-public class KhaltiPayConfig: NSObject {
+@objc public class KhaltiPayConfig: NSObject {
     public var publicKey:String
     public var pIdx:String
-    public var openInKhalti:Bool? = false
+    @objc public var openInKhalti:Bool = false
     public var environment:Environment = Environment.TEST
     
-    public init(publicKey:String,pIdx:String,openInKhalti:Bool? = false,environment:Environment) {
+   @objc public init(publicKey:String,pIdx:String,openInKhalti:Bool = false,environment:Environment) {
         self.publicKey = publicKey
         self.pIdx = pIdx
         self.openInKhalti = openInKhalti
         self.environment = environment
     }
     
-    public func copyWith( publicKey: String? = nil,pIdx:String? = nil,openInKhalti:Bool? = false,environment:Environment? = nil) -> KhaltiPayConfig{
+     public func copyWith( publicKey: String? = nil,pIdx:String? = nil,openInKhalti:Bool? = false,environment:Environment? = nil) -> KhaltiPayConfig{
         return KhaltiPayConfig(
             publicKey: publicKey ?? self.publicKey,
             pIdx: pIdx ?? self.pIdx,
@@ -42,7 +42,7 @@ public class KhaltiPayConfig: NSObject {
         return self.publicKey
     }
     func getOpenInKhalti() -> Bool{
-        return self.openInKhalti!
+        return self.openInKhalti
     }
     func getEnvironment() -> Environment{
         return self.environment

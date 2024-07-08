@@ -6,6 +6,6 @@
 //
 
 import Foundation
-public enum  Environment {
+@objc public enum  Environment:Int {
     case PROD, TEST
 }
