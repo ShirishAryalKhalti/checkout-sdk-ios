@@ -14,14 +14,15 @@
 		044B4EF52C36A25D00252BB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 044B4EF42C36A25D00252BB4 /* Assets.xcassets */; };
 		044B4EF82C36A25D00252BB4 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 044B4EF72C36A25D00252BB4 /* Base */; };
 		044B4EFB2C36A25D00252BB4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 044B4EFA2C36A25D00252BB4 /* main.m */; };
-		14440D832E6CFB688A0C9C7C /* Pods_KhaltiCheckout_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D487E4C997B1800A960D758A /* Pods_KhaltiCheckout_Example.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* KhaltiCheckOut.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* KhaltiCheckOut.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
-		8929BD64E144D3A07484F032 /* Pods_KhaltiCheckoutObjectiveC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12D6D8512F9BA500D83DD369 /* Pods_KhaltiCheckoutObjectiveC.framework */; };
+		8929BD64E144D3A07484F032 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		A5B9AFD151C73C2B9FEAB6AA /* Pods_KhaltiCheckout_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D487E4C997B1800A960D758A /* Pods_KhaltiCheckout_Example.framework */; };
+		AD8F86FB40448D58A4A52B2B /* Pods_KhaltiCheckoutObjectiveC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 918C1FE17B565C63EA5A2EEA /* Pods_KhaltiCheckoutObjectiveC.framework */; };
 		D0582F2AA3E4C46FD553B7AF /* Pods_KhaltiCheckout_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B5AFAD9D82851F6C4033524 /* Pods_KhaltiCheckout_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -48,7 +49,6 @@
 		044B4EF72C36A25D00252BB4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		044B4EF92C36A25D00252BB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		044B4EFA2C36A25D00252BB4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		12D6D8512F9BA500D83DD369 /* Pods_KhaltiCheckoutObjectiveC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KhaltiCheckoutObjectiveC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2ABDBF7FEE6D29C4F339EA2E /* Pods-KhaltiCheckoutObjectiveC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KhaltiCheckoutObjectiveC.release.xcconfig"; path = "Target Support Files/Pods-KhaltiCheckoutObjectiveC/Pods-KhaltiCheckoutObjectiveC.release.xcconfig"; sourceTree = "<group>"; };
 		400B4E8EE0543A3BEFD8AE28 /* Pods-KhaltiCheckout_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KhaltiCheckout_Example.debug.xcconfig"; path = "Target Support Files/Pods-KhaltiCheckout_Example/Pods-KhaltiCheckout_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		5B5AFAD9D82851F6C4033524 /* Pods_KhaltiCheckout_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KhaltiCheckout_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -64,6 +64,7 @@
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		66FE0B7D73281D3E7EEFC19B /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		918C1FE17B565C63EA5A2EEA /* Pods_KhaltiCheckoutObjectiveC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KhaltiCheckoutObjectiveC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC070A0EEDBCA68BFB7E3EC7 /* KhaltiCheckout.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = KhaltiCheckout.podspec; path = ../KhaltiCheckout.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		B31DB5A23CC28AF82E983D14 /* Pods-KhaltiCheckoutObjectiveC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KhaltiCheckoutObjectiveC.debug.xcconfig"; path = "Target Support Files/Pods-KhaltiCheckoutObjectiveC/Pods-KhaltiCheckoutObjectiveC.debug.xcconfig"; sourceTree = "<group>"; };
 		C96B7010BBF20D65CEDD051E /* Pods-KhaltiCheckout_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KhaltiCheckout_Tests.release.xcconfig"; path = "Target Support Files/Pods-KhaltiCheckout_Tests/Pods-KhaltiCheckout_Tests.release.xcconfig"; sourceTree = "<group>"; };
@@ -77,7 +78,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8929BD64E144D3A07484F032 /* Pods_KhaltiCheckoutObjectiveC.framework in Frameworks */,
+				8929BD64E144D3A07484F032 /* (null) in Frameworks */,
+				AD8F86FB40448D58A4A52B2B /* Pods_KhaltiCheckoutObjectiveC.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,7 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14440D832E6CFB688A0C9C7C /* Pods_KhaltiCheckout_Example.framework in Frameworks */,
+				A5B9AFD151C73C2B9FEAB6AA /* Pods_KhaltiCheckout_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,7 +197,7 @@
 			children = (
 				D487E4C997B1800A960D758A /* Pods_KhaltiCheckout_Example.framework */,
 				5B5AFAD9D82851F6C4033524 /* Pods_KhaltiCheckout_Tests.framework */,
-				12D6D8512F9BA500D83DD369 /* Pods_KhaltiCheckoutObjectiveC.framework */,
+				918C1FE17B565C63EA5A2EEA /* Pods_KhaltiCheckoutObjectiveC.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -403,12 +405,10 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-KhaltiCheckoutObjectiveC/Pods-KhaltiCheckoutObjectiveC-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/KhaltiCheckout/KhaltiCheckout.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KhaltiCheckout.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -577,16 +577,16 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 65M3758GWU;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = KhaltiCheckoutOjbectiveC/Info.plist;
+				INFOPLIST_FILE = KhaltiCheckoutObjectiveC/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
@@ -618,16 +618,16 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 65M3758GWU;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = KhaltiCheckoutOjbectiveC/Info.plist;
+				INFOPLIST_FILE = KhaltiCheckoutObjectiveC/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
