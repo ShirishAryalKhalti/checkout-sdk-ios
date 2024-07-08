@@ -10,15 +10,14 @@ public typealias OnPaymentResult = ((PaymentResult,Khalti?) -> ())
 public typealias OnMessageResult = (OnMessagePayload,Khalti?) -> ()
 public typealias OnReturn = (Khalti?) -> ()
 
-
-public class Khalti:NSObject{
-    public var config:KhaltiPayConfig
-    public var onPaymentResult: OnPaymentResult
-    public var onMessage: OnMessageResult
-    public var onReturn:OnReturn
+@objc public class Khalti:NSObject{
+    @objc public var config:KhaltiPayConfig
+    @objc public var onPaymentResult: OnPaymentResult
+    @objc public var onMessage: OnMessageResult
+    @objc public var onReturn:OnReturn
     
     
-    public init(config: KhaltiPayConfig,onPaymentResult: @escaping OnPaymentResult,onMessage:@escaping OnMessageResult,onReturn:@escaping OnReturn) {
+    @objc public init(config: KhaltiPayConfig,onPaymentResult: @escaping OnPaymentResult,onMessage:@escaping OnMessageResult,onReturn:@escaping OnReturn) {
         self.config = config
         self.onPaymentResult = onPaymentResult
         self.onMessage = onMessage
@@ -26,14 +25,6 @@ public class Khalti:NSObject{
     }
     
     
-    func copyWith( config: KhaltiPayConfig? = nil, onPaymentResult: OnPaymentResult? = nil, onMessage: OnMessageResult? = nil,onReturn:OnReturn? = nil) -> Khalti{
-        return Khalti(
-            config: config ?? self.config,
-            onPaymentResult: onPaymentResult ?? self.onPaymentResult,
-            onMessage: onMessage ?? self.onMessage,
-            onReturn: onReturn ?? self.onReturn
-        )
-    }
     
     func getConfig() -> KhaltiPayConfig{
         return self.config
@@ -57,7 +48,7 @@ public class Khalti:NSObject{
         NotificationCenter.default.post(name: .notificationAction, object: nil)
         
     }
-   
+    
     @objc public func verify(){
         NotificationCenter.default.post(name: .notificationType, object: nil)
     }
