@@ -25,29 +25,31 @@
 
 - (void)setupKhalti {
     // Khalti Configuration
-    KhaltiPayConfig *config = [[KhaltiPayConfig alloc] initWithPublicKey:@"4aa1b684f4de4860968552558fc8487d"
-                                                                    pIdx:@"tehsEsSbeEeLD5ECPrWDk2"
-                                                             environment:EnvironmentTEST];
+
+    
+    KhaltiPayConfig *config = [[KhaltiPayConfig alloc] initWithPublicKey:@"4aa1b684f4de4860968552558fc8487d" pIdx:@"tehsEsSbeEeLD5ECPrWDk2" openInKhalti:false environment:EnvironmentTEST];
     
     __weak typeof(self) weakSelf = self;
+       
     
     // Initialize Khalti
     self.khalti = [[Khalti alloc] initWithConfig:config
-                                 onPaymentResult:^(KhaltiPaymentResult *paymentResult, Khalti *khalti) {
+                                 onPaymentResult:^(PaymentResult *paymentResult, Khalti *khalti) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
         NSLog(@"Demo | onPaymentResult: %@", paymentResult);
         [khalti close];
+    
         
-        [strongSelf showSuccessAlertWithTitle:@"Success" message:paymentResult.message ?: @"Success"];
+        [strongSelf showSuccessAlertWithTitle:@"Success" message:paymentResult.getMessage ?: @"Success"];
         
-    } onMessage:^(KhaltiMessageResult *onMessageResult, Khalti *khalti) {
+    } onMessage:^(OnMessagePayload *onMessageResult, Khalti *khalti) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
         
         // Handle onMessage callback here
         // if needsPaymentConfiramtion true then verify payment status
-        [strongSelf showSuccessAlertWithTitle:@"" message:onMessageResult.message];
+        [strongSelf showSuccessAlertWithTitle:@"" message:onMessageResult.getMessage];
         
-        BOOL shouldVerify = onMessageResult.needsPaymentConfirmation;
+        BOOL shouldVerify = onMessageResult.getNeedsPaymentConfirmation;
         
         if (shouldVerify) {
             [khalti verify];
