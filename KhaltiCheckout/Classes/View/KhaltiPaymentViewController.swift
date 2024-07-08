@@ -67,6 +67,8 @@ class KhaltiPaymentViewController: UIViewController {
     @objc func handleNotification(notification: Notification) {
         if notification.name == Notification.Name.notificationType {
             self.verifyPaymentStatus()
+        }else{
+            self.dismiss(animated: true)
         }
     }
 
