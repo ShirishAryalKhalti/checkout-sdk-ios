@@ -15,7 +15,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         
-        khalti = Khalti.init(config: KhaltiPayConfig(publicKey:"4aa1b684f4de4860968552558fc8487d", pIdx:"tehsEsSbeEeLD5ECPrWDk2",environment:Environment.TEST), onPaymentResult: {[weak self] (paymentResult,khalti) in
+        khalti = Khalti.init(config: KhaltiPayConfig(publicKey:"4aa1b684f4de4860968552558fc8487d", pIdx:"8mBsbuzGYDWveAZkMn4Q2F",environment:Environment.TEST), onPaymentResult: {[weak self] (paymentResult,khalti) in
             print("Demo | onPaymentResult", paymentResult)
             khalti?.close()
             
