@@ -2,10 +2,18 @@ use_frameworks!
 
 platform :ios, '12.0'
 
-target 'KhaltiCheckout_Example' do
-  pod 'IQKeyboardManagerSwift'
+# Define a method to include common pods
+def common_pods
+  
   pod 'KhaltiCheckout', :path => '../'
+end
 
+target 'KhaltiCheckout_Example' do
+  use_frameworks!
+  common_pods
+  
+  pod 'IQKeyboardManagerSwift'
+  
   target 'KhaltiCheckout_Tests' do
     inherit! :search_paths
 
@@ -14,3 +22,10 @@ target 'KhaltiCheckout_Example' do
     pod 'Nimble'
   end
 end
+
+target 'KhaltiCheckoutObjectiveC' do
+  use_frameworks!
+  common_pods
+  
+  end
+
