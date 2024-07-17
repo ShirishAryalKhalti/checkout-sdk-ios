@@ -6,7 +6,7 @@
 //
 import Foundation
 
-public class PaymentResult {
+@objc public class PaymentResult:NSObject {
     public var status:String?
     public var payload:PaymentLoadModel?
     public var message:String?
@@ -15,6 +15,10 @@ public class PaymentResult {
         self.status = status
         self.payload = payload
         
+    }
+    
+    @objc public func getMessage() -> String?{
+        return self.message
     }
     
 }

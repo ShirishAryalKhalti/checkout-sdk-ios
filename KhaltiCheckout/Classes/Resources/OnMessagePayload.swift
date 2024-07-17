@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class OnMessagePayload {
+@objc public class OnMessagePayload:NSObject {
     public var event:OnMessageEvent
     public var message:String
     public var code:Int?
@@ -22,6 +22,14 @@ public class OnMessagePayload {
     
     convenience init(event: OnMessageEvent, message: String) {
         self.init(event: event, message: message,code: nil,needsPaymentConfirmation: false)
+    }
+    
+    @objc public func getMessage() -> String?{
+        return self.message
+    }
+    
+    @objc public func getNeedsPaymentConfirmation() -> Bool{
+        return self.needsPaymentConfirmation
     }
 }
 
