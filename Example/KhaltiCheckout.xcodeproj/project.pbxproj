@@ -13,6 +13,10 @@
 		044B4EF52C36A25D00252BB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 044B4EF42C36A25D00252BB4 /* Assets.xcassets */; };
 		044B4EF82C36A25D00252BB4 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 044B4EF72C36A25D00252BB4 /* Base */; };
 		044B4EFB2C36A25D00252BB4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 044B4EFA2C36A25D00252BB4 /* main.m */; };
+		0476A82E2C47DD840019514A /* targets.png in Resources */ = {isa = PBXBuildFile; fileRef = 0476A82D2C47DD840019514A /* targets.png */; };
+		0476A82F2C47DD840019514A /* targets.png in Resources */ = {isa = PBXBuildFile; fileRef = 0476A82D2C47DD840019514A /* targets.png */; };
+		0476A8312C47DDD20019514A /* select_targets.png in Resources */ = {isa = PBXBuildFile; fileRef = 0476A8302C47DDD20019514A /* select_targets.png */; };
+		0476A8322C47DDD20019514A /* select_targets.png in Resources */ = {isa = PBXBuildFile; fileRef = 0476A8302C47DDD20019514A /* select_targets.png */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* KhaltiCheckOut.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* KhaltiCheckOut.storyboard */; };
@@ -46,6 +50,8 @@
 		044B4EF72C36A25D00252BB4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		044B4EF92C36A25D00252BB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		044B4EFA2C36A25D00252BB4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		0476A82D2C47DD840019514A /* targets.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = targets.png; sourceTree = "<group>"; };
+		0476A8302C47DDD20019514A /* select_targets.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = select_targets.png; sourceTree = "<group>"; };
 		2ABDBF7FEE6D29C4F339EA2E /* Pods-KhaltiCheckoutObjectiveC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KhaltiCheckoutObjectiveC.release.xcconfig"; path = "Target Support Files/Pods-KhaltiCheckoutObjectiveC/Pods-KhaltiCheckoutObjectiveC.release.xcconfig"; sourceTree = "<group>"; };
 		400B4E8EE0543A3BEFD8AE28 /* Pods-KhaltiCheckout_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KhaltiCheckout_Example.debug.xcconfig"; path = "Target Support Files/Pods-KhaltiCheckout_Example/Pods-KhaltiCheckout_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		5B5AFAD9D82851F6C4033524 /* Pods_KhaltiCheckout_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KhaltiCheckout_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -115,9 +121,19 @@
 			path = KhaltiCheckoutObjectiveC;
 			sourceTree = "<group>";
 		};
+		0476A82C2C47DCA70019514A /* ScreenShots */ = {
+			isa = PBXGroup;
+			children = (
+				0476A8302C47DDD20019514A /* select_targets.png */,
+				0476A82D2C47DD840019514A /* targets.png */,
+			);
+			path = ScreenShots;
+			sourceTree = "<group>";
+		};
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
+				0476A82C2C47DCA70019514A /* ScreenShots */,
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* Example for KhaltiCheckout */,
 				607FACE81AFB9204008FA782 /* Tests */,
@@ -327,7 +343,9 @@
 			files = (
 				044B4EF52C36A25D00252BB4 /* Assets.xcassets in Resources */,
 				044B4EF82C36A25D00252BB4 /* Base in Resources */,
+				0476A8322C47DDD20019514A /* select_targets.png in Resources */,
 				044B4EF32C36A25C00252BB4 /* Base in Resources */,
+				0476A82F2C47DD840019514A /* targets.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,7 +355,9 @@
 			files = (
 				607FACDB1AFB9204008FA782 /* KhaltiCheckOut.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
+				0476A8312C47DDD20019514A /* select_targets.png in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
+				0476A82E2C47DD840019514A /* targets.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
