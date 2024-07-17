@@ -14,10 +14,10 @@ public typealias OnReturn = (Khalti?) -> ()
     @objc public var config:KhaltiPayConfig
     @objc public var onPaymentResult: OnPaymentResult
     @objc public var onMessage: OnMessageResult
-    @objc public var onReturn:OnReturn
+    @objc public var onReturn:OnReturn?
     
     
-    @objc public init(config: KhaltiPayConfig,onPaymentResult: @escaping OnPaymentResult,onMessage:@escaping OnMessageResult,onReturn:@escaping OnReturn) {
+    @objc public init(config: KhaltiPayConfig,onPaymentResult: @escaping OnPaymentResult,onMessage:@escaping OnMessageResult,onReturn: OnReturn? = nil ) {
         self.config = config
         self.onPaymentResult = onPaymentResult
         self.onMessage = onMessage

@@ -238,7 +238,7 @@ extension KhaltiPaymentViewController :WKNavigationDelegate, WKUIDelegate{
         if let httpResponse = navigationResponse.response as? HTTPURLResponse {
             
             if let returnUrl ,(httpResponse.url?.description ?? "") .contains(returnUrl) {
-                self.khalti?.onReturn(khalti)
+                self.khalti?.onReturn?(khalti)
                 self.verifyPaymentStatus()
                 
             }
