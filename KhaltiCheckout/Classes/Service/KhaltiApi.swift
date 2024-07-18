@@ -86,8 +86,8 @@ extension KhaltiAPIService:KhaltiApiServiceProtocol{
         if isConnected{
             print("===========================================================")
             print("Request Url:")
-            print (request.url)
-            print(request.allHTTPHeaderFields)
+            print (request.url ?? "url empty")
+            print(request.allHTTPHeaderFields ?? "empty header")
             
             print("===========================================================")
             if let bodyData = request.httpBody {
@@ -160,7 +160,6 @@ extension KhaltiAPIService:KhaltiApiServiceProtocol{
                             return
                     }
                     
-                    let errorMessage = String(data:data,encoding: .utf8)
                     print("===========================================================")
                     print("Received JSON data:", String(data: data, encoding: .utf8) ?? "Invalid UTF-8 data")
                     print("===========================================================")

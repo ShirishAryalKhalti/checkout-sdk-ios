@@ -25,4 +25,5 @@ Pod::Spec.new do |s|
       'KhaltiCheckout' => ['KhaltiCheckout/Assets/**/*.{png,storyboard,xib,xcassets}']
   }
   s.frameworks = 'UIKit'
+  s.swift_versions = '4.0'
 end
