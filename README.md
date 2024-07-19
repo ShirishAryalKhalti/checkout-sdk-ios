@@ -22,15 +22,15 @@ pod 'KhaltiCheckout'
 
 <p align="center">
 <strong>Khalti Payment Gateway</strong><br>
-<small>Android SDK</small>
+<small>iOS SDK</small>
 </p>
 
 <p align="center">
 <a href="https://docs.khalti.com/"><img src="https://img.shields.io/badge/Khalti-Docs-blueviolet" alt="Khalti Docs"></a>
-<a href="https://github.com/khalti/checkout-sdk-android/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-BSD--3-informational" alt="BSD-3 License"></a>
-<a href="https://github.com/khalti/checkout-sdk-android/issues"><img src="https://img.shields.io/github/issues/khalti/checkout-sdk-android" alt="GitHub issues"></a>
+<a href="https://github.com/khalti/checkout-sdk-ios/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-BSD--3-informational" alt="BSD-3 License"></a>
+<a href="https://github.com/khalti/checkout-sdk-ios/issues"><img src="https://img.shields.io/github/issues/khalti/checkout-sdk-ios" alt="GitHub issues"></a>
 <a href="https://khalti.com"><img src="https://img.shields.io/website?url=https%3A%2F%2Fdocs.khalti.com" alt="Website"></a>
-<a href="https://github.com/khalti/checkout-sdk-android/releases"><img alt="GitHub Release Date" src="https://img.shields.io/github/release-date/khalti/checkout-sdk-android"></a>
+<a href="https://github.com/khalti/checkout-sdk-ios/releases"><img alt="GitHub Release Date" src="https://img.shields.io/github/release-date/khalti/checkout-sdk-ios"></a>
 <a href="https://www.facebook.com/khalti.official"><img src="https://img.shields.io/badge/follow--000?style=social&logo=facebook" alt="Follow Khalti in Facebook"></a>
 <a href="https://www.instagram.com/khaltiofficial"><img src="https://img.shields.io/badge/follow--000?style=social&logo=instagram" alt="Follow Khalti in Instagram"></a>
 <a href="https://twitter.com/intent/follow?screen_name=khaltiofficial"><img src="https://img.shields.io/twitter/follow/khaltiofficial?style=social" alt="Follow Khalti in Twitter"></a>
@@ -63,7 +63,7 @@ Using Khalti Payment Gateway, you do not need to integrate with individual banks
 
 
 ### How to use?
-Go to the [documentation to install checkout-iOS](https://docs.khalti.com/checkout/android/).
+Go to the [documentation to install checkout-iOS](https://docs.khalti.com/checkout/ios/).
 
 ## License
 
